@@ -10,12 +10,8 @@ function Login ({ onLoginSuccess }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post('/login', { email, password });
-      const { access_token } = response.data;
-
-      // todo: improve security (ie don't use localstorage for this)
-      localStorage.setItem('token', access_token);
-      onLoginSuccess(access_token);
+      await api.post('/auth/login', { email, password });
+      onLoginSuccess();
     } catch (err) {
       setError(err.response?.data?.error || 'An error occurred');
     }

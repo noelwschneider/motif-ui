@@ -12,7 +12,7 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post('/register', { username, email, password });
+      const response = await api.post('/auth/register', { username, email, password });
       // todo: immediate login & redirect  
       setSuccess('Registration successful! You can now log in.');
       setError('');
