@@ -13,7 +13,7 @@ export default function Login() {
     setError('');
     try {
       await api.post('/auth/login', { email, password });
-      navigate('/dashboard'); // Redirect to the dashboard
+      navigate('/home');
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred');
     }
