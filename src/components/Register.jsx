@@ -1,62 +1,58 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../api/api.js';
 
-
-function Register() {
+export default function RegisterForm() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleRegister = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
     try {
-      const response = await api.post('/auth/register', { username, email, password });
-      // todo: immediate login & redirect  
-      setSuccess('Registration successful! You can now log in.');
-      setError('');
+      await api.post('/auth/register', { username, email, password });
+      navigate('/login'); // Redirect to login after successful registration
     } catch (err) {
-      setError(err.response?.data?.error || 'An error occurred');
-      setSuccess('');
+      setError(err.response?.data?.message || 'An error occurred');
     }
   };
 
   return (
-    <form onSubmit={handleRegister}>
+    <div>
       <h2>Register</h2>
-      {success && <p style={{ color: 'green' }}>{success}</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <div>
-        <label>Username:</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>Email:</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit">Register</button>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Username:</label>
+          <input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Register</button>
+      </form>
+    </div>
   );
 };
-
-export default Register;
