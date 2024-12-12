@@ -1,0 +1,60 @@
+/* color */
+:root {
+    --red: #B30024;
+    --orange: #D5770B;
+    --yellow: #FFC65C;
+    --green: #66FF99;
+    --blue: #80CCFF;
+    --purple: #814B78;
+
+    --black: #000;
+    --gray-0: #000;
+    --gray-1: #111;
+    --gray-2: #222;
+    --gray-3: #333;
+    --gray-4: #444;
+    --gray-5: #555;
+    --gray-6: #666;
+    --gray-7: #777;
+    --gray-8: #888;
+    --gray-9: #999;
+    --gray-a: #aaa;
+    --gray-b: #bbb;
+    --gray-c: #ccc;
+    --gray-d: #ddd;
+    --gray-e: #eee;
+    --gray-f: #fff;
+    --white: #fff;
+
+    --dark: var(--gray-2);
+    --light: var(--gray-d);
+
+    --primary: var(--blue);
+    --secondary: var(--light);
+    --line: var(--white);
+    --fill: var(--dark);
+}
+
+/* size */
+:root {
+    --BASE-SIZE: 18px;
+    
+    --xs: 0.35rem;
+    --s: 0.6rem;
+    --m: 1rem;
+    --l: 1.6rem;
+    --xl: 2.5rem;
+    --line-height: 1.5;
+}
+
+/* fontface */
+:root {
+    /* todo: switch from Google Fonts to download before deploy */
+    --ff: Montserrat, Verdana, Helvetica, sans-serif;
+    --ff-sans: var(--ff);
+    --ff-serif: Georgia, serif;
+    --ff-mono: Courier, monospace;
+    --ff-heading: Josefin Sans, Montserrat, serif;
+    /* todo: use svg for logo */
+    --ff-logo: Montserrat Underline, Montserrat, Josefin Sans, Verdana, serif;
+}
