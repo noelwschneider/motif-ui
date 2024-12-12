@@ -3,12 +3,15 @@ import Home from './components/Home';
 import Login from './components/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import Register from './components/Register';
+import Navbar from './components/Navbar/Navbar';
 
 
 export default function App() {
 
   return (
     <Router>
+      <Navbar />
+
       <div id="content-wrapper">
         <Routes>
           <Route path="/login" element={<Login />} />
