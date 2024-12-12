@@ -5,25 +5,25 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Register from './components/Register';
 
 
-function App() {
+export default function App() {
 
   return (
     <Router>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route
-          path="/home"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/" element={<Navigate to="/login" />} />
-      </Routes>
+      <div id="content-wrapper">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/" element={<Navigate to="/home" />} />
+        </Routes>
+      </div>
     </Router>
   );
 };
-
-export default App;
