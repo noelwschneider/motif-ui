@@ -4,6 +4,7 @@ import Login from './components/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import Register from './components/Register';
 import Navbar from './components/Navbar/Navbar';
+import SpotifyLoginCallback from './components/SpotifyLoginCallback';
 
 
 export default function App() {
@@ -16,6 +17,8 @@ export default function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/spotify-login-callback" element={<SpotifyLoginCallback />} />
+
           <Route
             path="/home"
             element={
