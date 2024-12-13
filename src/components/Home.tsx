@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import api from '../api/api.js';
+import api from '../api/_api.js';
 import SpotifyLogin from './SpotifyLogin.js';
 
 
@@ -8,7 +8,7 @@ export default function Home() {
 
   const handleLogout = async () => {
     try {
-      await api.post('/auth/logout');
+      await api.auth.logout();
       navigate('/login');
     } catch (err) {
       console.error('Logout failed', err);

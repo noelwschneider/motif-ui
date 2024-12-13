@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../api/api.js';
+import api from '../api/_api.js';
 
 export default function RegisterForm() {
   const [username, setUsername] = useState('');
@@ -13,8 +13,8 @@ export default function RegisterForm() {
     e.preventDefault();
     setError('');
     try {
-      await api.post('/auth/register', { username, email, password });
-      navigate('/login'); // Redirect to login after successful registration
+      await api.auth.register({ username, email, password })
+      navigate('/login');
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred');
     }
