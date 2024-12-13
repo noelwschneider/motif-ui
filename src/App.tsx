@@ -18,7 +18,6 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/spotify-login-callback" element={<SpotifyLoginCallback />} />
-
           <Route
             path="/home"
             element={
