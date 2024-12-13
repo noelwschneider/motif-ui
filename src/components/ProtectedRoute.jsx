@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../api/api.js';
+import api from '../api/_api.js';
 
 
 export default function ProtectedRoute({ children }) {
@@ -10,7 +10,7 @@ export default function ProtectedRoute({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        await api.get('/auth/verify');
+        await api.auth.verify();
         setIsAuthenticated(true);
       } catch {
         setIsAuthenticated(false);

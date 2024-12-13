@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import api from '../api/api';
+import api from '../api/_api';
 
 
 export default function SpotifyLoginCallback() {
@@ -15,7 +15,7 @@ export default function SpotifyLoginCallback() {
       // IIFE allows use of async in useEffect
       (async () => {
         try {
-          await api.get(`/spotify/callback?code=${code}`);
+          await api.spotify.callback(code);
           navigate('/home');
         } catch (err) {
           console.error('Error during Spotify callback handling:', err);

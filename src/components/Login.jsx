@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../api/api.js';
+import api from '../api/_api.js';
+
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -12,12 +13,12 @@ export default function Login() {
     e.preventDefault();
     setError('');
     try {
-      await api.post('/auth/login', { email, password });
+      await api.auth.login({ email, password });
       navigate('/home');
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred');
     }
-  };  
+  };
 
   return (
     <div>
