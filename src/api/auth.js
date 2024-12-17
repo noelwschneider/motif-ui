@@ -1,3 +1,4 @@
+
 export default function addAuth(api) {
     const urlPrefix = '/auth';
 
@@ -11,7 +12,12 @@ export default function addAuth(api) {
         },
 
         refreshToken: async () => {
-            return api.post(urlPrefix + '/refresh');
+            const csrfToken = getCookie('csrf_refresh_token');
+            return api.post(urlPrefix + '/refresh', null, {
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken,
+                },
+            });
         },
 
         logout: async () => {
@@ -24,7 +30,7 @@ export default function addAuth(api) {
     };
 
     addInterceptor(api);
-};
+}
 
 
 function addInterceptor(api) {
@@ -40,7 +46,12 @@ function addInterceptor(api) {
         if (!isRefreshing) {
             isRefreshing = true;
             try {
-                const { data } = await api.post('/auth/refresh');
+                const csrfToken = getCookie('csrf_refresh_token');
+                const { data } = await api.post('/auth/refresh', null, {
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken,
+                    },
+                });
                 isRefreshing = false;
                 onRefreshed(data.token);
             } catch (error) {
@@ -80,4 +91,20 @@ function addInterceptor(api) {
             return Promise.reject(error);
         }
     );
+
+    api.interceptors.request.use((config) => {
+        const csrfToken = getCookie('csrf_access_token');
+        if (csrfToken) {
+            config.headers['X-CSRF-TOKEN'] = csrfToken;
+        }
+        return config;
+    });
+};
+
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
 };
