@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import api from '../api/_api.js';
 import SpotifyLogin from './SpotifyLogin.js';
+import Searchbar from './Search/Searchbar.js';
 
 
 export default function Home() {
@@ -19,6 +20,8 @@ export default function Home() {
     <div>
       <h1>Homepage</h1>
       <p>This is a protected route. Only authenticated users can see this.</p>
+
+      <Searchbar />
       <SpotifyLogin />
       <button onClick={handleLogout}>Logout</button>
     </div>
