@@ -1,0 +1,10 @@
+.icon-button {
+    background-color: transparent;
+}
+
+.icon-button-wrapper {
+    :hover {
+        color: var(--dark);
+        background-color: var(--primary);
+    }
+}
