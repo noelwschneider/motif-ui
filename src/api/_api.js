@@ -4,7 +4,7 @@ import addSpotify from './spotify';
 
 
 const api = axios.create({
-  baseURL: 'http://127.0.0.1:5000/api', // todo: env variables
+  baseURL: 'http://127.0.0.1:5174/api', // todo: env variables
   timeout: 10000,
   withCredentials: true,
   headers: {
