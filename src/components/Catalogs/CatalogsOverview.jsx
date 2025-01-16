@@ -18,7 +18,7 @@ export default function CatalogsOverview() {
             setCatalogs(response.data);
             setError('');
         } catch (err) {
-            setError('Failed to load catalogs');
+            setError('Failed to load catalogs', err);
         } finally {
             setLoading(false);
         }
@@ -43,7 +43,7 @@ export default function CatalogsOverview() {
             setNewCatalog({ name: '', description: '' });
             fetchCatalogs();
         } catch (err) {
-            setError('Failed to create catalog');
+            setError('Failed to create catalog', err);
         }
     };
 
@@ -61,7 +61,7 @@ export default function CatalogsOverview() {
             await api.catalogs.delete(id);
             fetchCatalogs();
         } catch (err) {
-            setError('Failed to delete catalog');
+            setError('Failed to delete catalog', err);
         }
     };
 
