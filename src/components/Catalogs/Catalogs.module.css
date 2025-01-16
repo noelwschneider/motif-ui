@@ -1,0 +1,60 @@
+.catalogs-container {
+    /* padding: 1rem; */
+}
+
+.catalog-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    /* justify-content: space-between; */
+
+    padding: 0;
+    margin: var(--m) 0;
+}
+
+.catalog-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+    padding: var(--m);
+    margin: var(--s);
+    width: 250px;
+    height: 150px;
+
+    border: 1px solid #ccc;
+    border-radius: var(--xs);
+}
+
+.catalog-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.catalog-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s);
+    margin-top: var(--xl);
+}
+
+.catalog-form input,
+.catalog-form textarea {
+    padding: var(--s);
+    font-size: var(--m);
+    border: 1px solid var(--light);
+    border-radius: 5px;
+}
+
+.catalog-form button {
+    padding: var(--s) var(--m);
+    background-color: var(--light);
+    color: var(--dark);
+    border: none;
+    border-radius: var(--xs);
+    cursor: pointer;
+}
+
+.catalog-form button:hover {
+    background-color: var(--blue);
+}
