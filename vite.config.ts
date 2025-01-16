@@ -6,4 +6,8 @@ export default defineConfig({
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
+  server: {
+    host: '127.0.0.1',
+    port: 5173
+  }
 })
