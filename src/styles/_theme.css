@@ -33,6 +33,7 @@
     --secondary: var(--light);
     --line: var(--white);
     --fill: var(--dark);
+    --danger: var(--red);
 }
 
 /* size */
