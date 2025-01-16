@@ -96,7 +96,7 @@ function addInterceptor(api) {
         const csrfToken = getCookie('csrf_access_token');
         if (csrfToken) {
             config.headers['X-CSRF-TOKEN'] = csrfToken;
-        }
+        };
         return config;
     });
 };
