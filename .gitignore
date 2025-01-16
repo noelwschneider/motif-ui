@@ -27,4 +27,4 @@ dist-ssr
 .env
 
 # local
-_dev/*
+_dev/
