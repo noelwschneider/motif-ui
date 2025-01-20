@@ -1,0 +1,34 @@
+.artist-profile {
+    display: flex;
+    flex-direction: row;
+}
+
+.artist-data-container {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ALBUMS */
+.album-row {
+    h2, p {
+        display: inline-block;
+        margin: 0 var(--s);
+    }
+}
+.album-title {}
+.album-year { color: var(--gray) }
+
+/* TRACKS */
+.track-list { margin: var(--s); }
+.track-order { color: var(--gray); }
+.track-title { margin: var(--s); }
+.track-duration { color: var(--gray); }
+
+/* MOTIF DATA */
+.motif-data-container {
+    flex: 1 1 0;
+}
+
+/* UTIL */
+.active { color: var(--primary); }
