@@ -28,6 +28,7 @@
 
     --dark: var(--gray-2);
     --light: var(--gray-d);
+    --gray: var(--gray-8);
 
     --primary: var(--blue);
     --secondary: var(--light);

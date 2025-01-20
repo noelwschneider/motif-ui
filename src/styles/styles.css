@@ -20,7 +20,6 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--ff-heading);
   font-weight: 200;
-  color: var(--white);
   
   line-height: var(--line-height);
   margin: 0;
