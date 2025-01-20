@@ -19,7 +19,7 @@ export default function Searchbar() {
         setError(null);
 
         try {
-            const response = await api.spotify.search({ q: query, type: 'track', limit: 20, offset: 0 });
+            const response = await api.spotify.search({ query, type: 'track', limit: 20, offset: 0 });
             const data =  response.data;
             setResults(data.tracks?.items || []);
         } catch (err) {
