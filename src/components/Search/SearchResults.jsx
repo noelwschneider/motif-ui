@@ -1,12 +1,9 @@
 import styles from './Search.module.css';
+import { formatDuration } from '../../util';
+import { Link } from 'react-router-dom';
 
 
 export default function SearchResults({ results }) {
-    const formatDuration = (ms) => {
-        const minutes = Math.floor(ms / 60000);
-        const seconds = ((ms % 60000) / 1000).toFixed(0);
-        return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-    };
 
     return (
         <div className={styles['search-results-container']}>
@@ -30,9 +27,25 @@ export default function SearchResults({ results }) {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
+                                    {/* todo: map through list */}
                                     {result.artists[0]?.name}
                                 </a>
                             </p>
+
+                            <Link 
+                                to='/artist-profile'
+                                state={{
+                                    activeItem: {
+                                        type: "artist",
+                                        spotifyId: result.id,
+                                    },
+                                    artist: {
+                                        title: result.artists[0]?.name,
+                                        spotifyId: result.artists[0]?.id
+                                    },
+                                }}
+                            >Test</Link>
+
                             <p>
                                 <strong>Album:</strong>{" "}
                                 <a

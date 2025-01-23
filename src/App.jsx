@@ -5,6 +5,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Register from './components/Register';
 import Navbar from './components/Navbar/Navbar';
 import SpotifyLoginCallback from './components/SpotifyLoginCallback';
+import ArtistProfile from './components/ArtistProfile/ArtistProfile';
 
 
 export default function App() {
@@ -18,7 +19,8 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/spotify-login-callback" element={<SpotifyLoginCallback />} />
-
+          <Route path="/artist-profile" element={<ArtistProfile />} />
+          
           <Route
             path="/home"
             element={
