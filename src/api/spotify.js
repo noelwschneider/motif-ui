@@ -2,6 +2,13 @@ export default function addSpotify(api) {
     const urlPrefix = '/spotify';
     
     api.spotify = {
+
+        artistProfile: async (id) => {
+            return api.get(urlPrefix + '/artist-profile', {
+                params: { id }
+            });
+        },
+
         callback: async ( code ) => {
             return api.get(urlPrefix + '/callback' + `?code=${code}`);
         },
@@ -22,7 +29,7 @@ export default function addSpotify(api) {
             q += artist ? ` artist:${artist}` : '';
             q += genre ? ` genre:${genre}` : '';
             q += track ? ` track:${track}` : '';
-            
+
             if (!q) return null;
 
             return api.get(urlPrefix + '/search', {
