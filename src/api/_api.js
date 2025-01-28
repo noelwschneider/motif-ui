@@ -1,6 +1,7 @@
 import axios from 'axios';
 import addAuth from './auth';
 import addCatalogs from './catalog';
+import addReviews from './review';
 import addSpotify from './spotify';
 
 
@@ -16,6 +17,7 @@ const api = axios.create({
 
 addAuth(api);
 addCatalogs(api);
+addReviews(api);
 addSpotify(api);
 
 

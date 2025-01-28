@@ -4,6 +4,8 @@ export default function addSpotify(api) {
     api.spotify = {
 
         artistProfile: async (id) => {
+            if (!id) return null;
+            
             return api.get(urlPrefix + '/artist-profile', {
                 params: { id }
             });
