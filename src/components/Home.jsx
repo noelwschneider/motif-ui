@@ -1,12 +1,11 @@
-import ArtistProfile from './ArtistProfile/ArtistProfile.jsx';
-import Searchbar from './Search/Searchbar.jsx';
+import Explore from "./Explore/Explore";
+
 
 export default function Home() {
-  
 
   return (
-    <div>
-      <Searchbar />
+    <div className="home-container">
+      <Explore />
     </div>
   );
 };
