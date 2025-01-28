@@ -1,4 +1,4 @@
-import styles from './IconButton.module.css';
+import styles from './Icon.module.css';
 
 
 export default function IconButton({ icon, fn, color='primary' }) {
