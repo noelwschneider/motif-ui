@@ -1,20 +1,24 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../api/_api.js';
+import { UserContext } from '../App.jsx';
 
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const { user, setUser } = useContext(UserContext);
+  const location = useLocation();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     try {
-      await api.auth.login({ email, password });
-      navigate('/home');
+      const loginResponse = await api.auth.login({ email, password });
+      setUser(loginResponse?.data);
+      navigate(location.state.loginRedirect || '/home');
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred');
     }
