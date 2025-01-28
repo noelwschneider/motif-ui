@@ -1,37 +1,56 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './components/Home';
 import Login from './components/Login';
-import ProtectedRoute from './components/ProtectedRoute';
 import Register from './components/Register';
 import Navbar from './components/Navbar/Navbar';
 import SpotifyLoginCallback from './components/SpotifyLoginCallback';
 import ArtistProfile from './components/ArtistProfile/ArtistProfile';
+import { createContext, useEffect, useState } from 'react';
+import api from './api/_api';
 
+// context docs:
+// https://react.dev/reference/react/useContext#updating-data-passed-via-context
+export const UserContext = createContext(null);
+
+
+// todo: if user is still logged in from previous session, use cookies to fetch the data that typically comes back from the /login page
 
 export default function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const verifyUser = async () => {
+      try {
+        const userResponse = await api.auth.verify();
+        setUser(userResponse?.data);
+      } catch (err) {
+        console.error(err);
+        setUser(null);
+      }
+    };
+    verifyUser();
+  }, []);
 
   return (
-    <Router>
-      <Navbar />
+    <UserContext.Provider value={{ user, setUser }}>
+      <Router>
+        <Navbar />
 
-      <div id="content-wrapper">
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/spotify-login-callback" element={<SpotifyLoginCallback />} />
-          <Route path="/artist-profile" element={<ArtistProfile />} />
-          
-          <Route
-            path="/home"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/" element={<Navigate to="/home" />} />
-        </Routes>
-      </div>
-    </Router>
+        <div id="content-wrapper">
+          <Routes>
+            <Route path="/login" element={user ? <Home /> : <Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/spotify-login-callback" element={<SpotifyLoginCallback />} />
+            <Route path="/artist-profile" element={<ArtistProfile />} />
+            
+            <Route
+              path="/home"
+              element={<Home />}
+            />
+            <Route path="/" element={<Navigate to="/home" />} />
+          </Routes>
+        </div>
+      </Router>
+    </UserContext.Provider>
   );
 };
