@@ -1,0 +1,66 @@
+.user {
+    /* border: 1px solid red; */
+    
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    width: 100%;
+}
+
+.profile-header {
+    /* border: 1px solid blue; */
+    
+    flex: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.activity-container {
+    /* border: 1px solid green; */
+    height: 100%;
+
+    flex: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.catalogs-summary {
+    /* border: 1px solid purple; */
+    width: 50%;
+}
+.catalog-items {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.catalog-item {
+    margin: 1rem;
+    height: 10rem;
+    width: 10rem;
+}
+.catalog-thumbnail {
+    border: 1px solid var(--light);
+    height: 90%;
+}
+.catalog-title {
+    height: 10%;
+}
+
+.reviews-summary {
+    /* border: 1px solid orange; */
+    width: 50%;
+}
+.review-items {
+    display: flex;
+    flex-direction: column;
+}
+.review-item {
+    display: flex;
+    flex-direction: column;
+
+    h3, p, div, img { 
+        display: inline-block;
+        margin: 1rem;
+    }
+    .review-comment { display: block; }
+}
