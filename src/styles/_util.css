@@ -47,3 +47,10 @@
 .shadow-s { box-shadow: var(--s); }
 .shadow-m { box-shadow: var(--m); }
 .shadow-l { box-shadow: var(--l); }
+
+/* feedback */
+.clickable:hover {
+    cursor: pointer;
+    /* color: red; */
+    filter: brightness(60%);
+}
