@@ -11,32 +11,66 @@
 .search-item {
     display: flex;
     align-items: flex-start;
+    flex-direction: row;
     gap: var(--m);
     border: 1px solid var(--dark);
     border-radius: var(--s);
     padding: var(--s);
+    height: 100px;
 }
 
-.album-image {
+.search-item-image {
     /* todo: image size variables */
-    height: 100px;  
-    width: 100px;
+    height: 100%;
+    aspect-ratio: 1/1;
     border-radius: var(--xs);
     object-fit: cover;
 }
-
-.item-details {
+.search-item-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.search-item-topline {
+    display: flex;
+    flex-direction: row;
     flex: 1;
-
-    h2 { 
-        margin: 0;
-    }
-
-    p {
-        margin: 5px 0;
-    }
+}
+.search-item-details {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
 }
 
+.search-item-title {
+    margin: 0;
+}
+.search-item-duration {
+    color: var(--gray);
+    margin: 0 var(--xs);
+}
+.search-item-popularity {}
+.search-item-artists-list {}
+.search-item-artist {}
+.search-item-album-title {
+    color: var(--gray);
+    margin: 0 var(--xs);
+}
+.search-item-year {
+    color: var(--gray);
+    margin: 0 var(--xs);
+}
+.search-item-genres { color: var(--gray); }
+.search-item-album-type {
+    color: var(--gray);
+    font-style: italic;
+    margin: 0 var(--xs);
+    font-size: var(--s);
+}
+.search-item-plaintext { 
+    color: var(--gray);
+    font-style: italic;
+}
 
 .searchbar-input {
     padding: var(--s);
@@ -45,4 +79,12 @@
 
 .searchbar-btn {
     padding: var(--s);
+}
+
+
+.content-type-radio {
+    color: red;
+    accent-color: var(--primary);
+
+    &:focus { box-shadow: none; }
 }

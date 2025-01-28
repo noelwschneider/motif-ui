@@ -3,7 +3,7 @@ import { formatDuration } from '../../util';
 import { Link } from 'react-router-dom';
 
 
-export default function SearchResults({ results }) {
+export default function SearchResults({ results=[] }) {
 
     return (
         <div className={styles['search-results-container']}>
@@ -20,34 +20,26 @@ export default function SearchResults({ results }) {
 
                         <div className={styles['item-details']}>
                             <h2>{result.name}</h2>
+                            <span>{formatDuration(result.duration_ms)}</span>
                             <p>
-                                <strong>Artist:</strong>{" "}
-                                <a
-                                    href={result.artists[0]?.external_urls.spotify}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                {/* <Link to='/artist-profile'
+                                    state={{
+                                        activeItem: {
+                                            type: "artist",
+                                            spotifyId: result.id,
+                                        },
+                                        artist: {
+                                            title: result.artists[0]?.name,
+                                            spotifyId: result.artists[0]?.id
+                                        },
+                                    }}
                                 >
-                                    {/* todo: map through list */}
                                     {result.artists[0]?.name}
-                                </a>
+                                </Link> */}
+                                {result.artists[0]?.name}
                             </p>
 
-                            <Link 
-                                to='/artist-profile'
-                                state={{
-                                    activeItem: {
-                                        type: "artist",
-                                        spotifyId: result.id,
-                                    },
-                                    artist: {
-                                        title: result.artists[0]?.name,
-                                        spotifyId: result.artists[0]?.id
-                                    },
-                                }}
-                            >Test</Link>
-
                             <p>
-                                <strong>Album:</strong>{" "}
                                 <a
                                     href={result.album.external_urls.spotify}
                                     target="_blank"
