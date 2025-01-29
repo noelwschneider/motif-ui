@@ -2,7 +2,6 @@ export default function addSpotify(api) {
     const urlPrefix = '/spotify';
     
     api.spotify = {
-
         artistProfile: async (id) => {
             if (!id) return null;
             
