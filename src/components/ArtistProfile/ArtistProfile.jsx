@@ -1,10 +1,9 @@
 import styles from './ArtistProfile.module.css';
-import SpotifyIcon from '../SpotifyIcon';
 import { PlusCircle } from 'react-feather';
 import { useEffect, useState } from 'react';
 
 
-// support multiple artists by allowing user to toggle between them. Load both discographies / reviews / etc.
+// todo: support multiple artists by allowing user to toggle between them. Load both discographies / reviews / etc.
 
 // todo: 
     // add action buttons
@@ -17,21 +16,9 @@ export default function ArtistProfile({ itemId, setItemId, artistProfile }) {
     const [expandedAlbumIndex, setExpandedAlbumIndex] = useState(null);
 
     const handleItemClick = (selectedItemId, albumIndex) => {
-        console.group('in handleItemClick');
-        console.log('item id:', selectedItemId);
-        console.log('album index:', albumIndex);
-        console.groupEnd();
-
         if (selectedItemId === itemId) return;
         if (selectedItemId === artistProfile.spotifyId) setExpandedAlbumIndex(null);
         setItemId(selectedItemId);
-
-        // scan the artistProfile for the itemId
-            // if albumIndex, scan profile.albums[index]
-            // check if it's the artist
-            // scan artist.albums
-        // set the expandedAlbum accordingly
-        // get the item and set whatever state is needed for rendering the reviews/etc.
     };
     
 
@@ -80,7 +67,6 @@ export default function ArtistProfile({ itemId, setItemId, artistProfile }) {
                                                 ).map((track, trackIndex) => (
                                                     <div className={styles['track-row']}
                                                         key={trackIndex}
-                                                        // onClick={() => handleClick('track', track)}
                                                         onClick={() => handleItemClick(track.spotifyId, albumIndex)}
                                                     >
                                                         <span className={styles['track-order']}>
