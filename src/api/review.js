@@ -2,14 +2,34 @@ export default function addReviews(api) {
     const urlPrefix = '/reviews';
 
     api.reviews = {
-        create: async () => {},
+        create: async ({ 
+            comment, 
+            isPrivate, 
+            rating, 
+            spotifyArtistId, 
+            spotifyId 
+        }) => {
+            if (!spotifyId || !spotifyArtistId) return null;
+            
+            return api.post(urlPrefix + '/', { 
+                comment, 
+                isPrivate, 
+                rating, 
+                spotifyArtistId, 
+                spotifyId 
+            });
+        },
 
-        delete: async () => {},
-        
-        edit: async () => {},
+        delete: async (reviewId) => {
+            return api.delete(urlPrefix + `/${reviewId}`);
+        },
 
-        update: async () => {},
+        update: async ({ reviewId, rating, comment, isPrivate }) => {
+            return api.put(urlPrefix + `/${reviewId}`, { rating, comment, isPrivate });
+        },
 
-
+        currentUser: async () => {
+            return api.get(urlPrefix + '/');
+        },
     }
 };
