@@ -25,7 +25,6 @@ export default function addAuth(api) {
 
 
 function addInterceptors(api) {
-
     api.interceptors.response.use((response) => {
         try {
             const newCsrfToken = getCookie('csrf_access_token');
