@@ -5,15 +5,10 @@ import Register from './components/Register';
 import Navbar from './components/Navbar/Navbar';
 import SpotifyLoginCallback from './components/SpotifyLoginCallback';
 import ArtistProfile from './components/ArtistProfile/ArtistProfile';
-import { createContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import api from './api/_api';
+import { UserContext } from './UserContext';
 
-// context docs:
-// https://react.dev/reference/react/useContext#updating-data-passed-via-context
-export const UserContext = createContext(null);
-
-
-// todo: if user is still logged in from previous session, use cookies to fetch the data that typically comes back from the /login page
 
 export default function App() {
   const [user, setUser] = useState(null);
