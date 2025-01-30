@@ -2,28 +2,50 @@ export default function addCatalogs(api) {
     const urlPrefix = '/catalogs';
     
     api.catalogs = {
-        addItem: async (catalogId, { itemId, itemType, position, notes }) => {
-            return api.post(`${urlPrefix}/${catalogId}/items`, { itemId, itemType, position, notes });
+        addItem: async (catalogId, { 
+            spotifyId,
+            spotifyArtistId,
+            comment,
+            position,
+        }) => {
+            return api.post(`${urlPrefix}/${catalogId}`, {
+                spotifyId,
+                spotifyArtistId,
+                comment,
+                position,
+            });
         },
 
-        create: async ({ description, name, isPrivate }) => {
-            return api.post(urlPrefix + '/', { description, name, isPrivate });
+        createCatalog: async ({ comment, name, isPrivate, imageUrl }) => {
+            return api.post(`${urlPrefix}/`, { comment, name, isPrivate, imageUrl });
         },
 
-        delete: async (id) => {
-            return api.delete(`${urlPrefix}/${id}`);
+        deleteCatalog: async (catalogId) => {
+            return api.delete(`${urlPrefix}/${catalogId}`);
         },
 
-        deleteItem: async (catalogId, itemId) => {
-            return api.delete(`${urlPrefix}/${catalogId}/items/${itemId}`);
+        deleteItem: async (itemId) => {
+            return api.delete(`${urlPrefix}/item/${itemId}`);
         },
 
-        getAll: async () => {
-            return api.get(urlPrefix + '/');
+        getCatalogById: async (catalogId) => {
+            return api.get(`${urlPrefix}/${catalogId}`);
         },
 
-        update: async (id, { description, name, isPrivate }) => {
-            return api.put(`${urlPrefix}/${id}`, { description, name, isPrivate });
-        },   
+        getCurrentUserCatalogs: async () => {
+            return api.get(`${urlPrefix}/user`);
+        },
+
+        getUserPublicCatalogs: async (userId) => {
+            return api.get(`${urlPrefix}/user/${userId}`);
+        },
+
+        updateCatalog: async (catalogId, { comment, name, isPrivate, imageUrl }) => {
+            return api.put(`${urlPrefix}/${catalogId}`, { comment, name, isPrivate, imageUrl });
+        },
+        
+        updateCatalogItem: async (itemId, { position, comment }) => {
+            return api.put(`${urlPrefix}/item/${itemId}`, {position, comment })
+        },
     };
 };
