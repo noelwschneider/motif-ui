@@ -20,7 +20,6 @@ export default function Search({ handleSearchClick }) {
     const [contentType, setContentType] = useState('albums');
     const [error, setError] = useState(null);
     
-
     // todo: load state
     // todo: search w/o requiring user submit
     const handleSearch = async (e) => {
@@ -122,18 +121,17 @@ export default function Search({ handleSearchClick }) {
                             {item.artists?.length > 0 && 
                                 <h3 className={styles['search-item-artists-list']}>
                                     <span className={styles['search-item-plaintext']}>{'by '}</span>
-                                    {item.artists.map((artist, ix) => (<>
+                                    {item.artists.map((artist, ix) => (
                                         <span className={styles['search-item-artist'] + ' clickable'}
                                             onClick={() => handleSearchClick(artist.spotifyId)}
+                                            key={`artist-title-${artist.spotifyId-ix}`}
                                         >
                                             {artist.title}
+                                            {ix+1 !== item.artists.length && 
+                                                <span className={styles['search-item-plaintext']}>, </span>
+                                            }   
                                         </span>
-
-                                        {ix+1 !== item.artists.length && 
-                                            <span className={styles['search-item-plaintext']}>, </span>
-                                        }                                        
-                                        </>))}
-                                    
+                                    ))}
                                 </h3>
                             }
 
