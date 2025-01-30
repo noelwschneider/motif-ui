@@ -3,7 +3,7 @@ import styles from './Navbar.module.css';
 import api from '../../api/_api';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { UserContext } from '../../App';
+import { UserContext } from '../../UserContext';
 
 
 export default function Navbar() {
