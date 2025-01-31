@@ -1,5 +1,5 @@
 .navbar {
-    padding: var(--s);
+    padding: var(--s) var(--m) 0;
     background-color: var(--gray-1);
 }
 
@@ -14,13 +14,20 @@
     color: var(--primary);
     font-family: var(--ff-logo);
     font-size: var(--xl);
-    flex: 1 1 auto;
+    width: min-content;
     
     &:hover {
         text-decoration: none;
     }
 }
-
+.navbar-user-options {
+    text-align: end;
+}
+.user-icon {
+    background-color: var(--primary);
+    color: var(--dark);
+    border-radius: 100%;
+}
 .navbar-menu {
     flex: 1 1 auto;
     display: flex;
@@ -33,7 +40,6 @@
 .navbar-link {
     color: var(--line);
     font-size: var(--m);
-    /* transition: color 0.3s ease; */
 
     &:hover {
         color: var(--primary);
