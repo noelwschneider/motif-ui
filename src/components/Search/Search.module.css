@@ -1,90 +1,76 @@
-.search-results-container {
+.search-container {
+    flex: 0 0 1;
+    min-width: 0;
+    max-width: 37%;
     padding: var(--m);
 }
 
-.search-results {
-    display: flex;
-    flex-direction: column;
-    gap: var(--m);
-}
-
-.search-item {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: row;
-    gap: var(--m);
-    border: 1px solid var(--dark);
-    border-radius: var(--s);
-    padding: var(--s);
-    height: 100px;
-}
-
-.search-item-image {
-    /* todo: image size variables */
-    height: 100%;
-    aspect-ratio: 1/1;
-    border-radius: var(--xs);
-    object-fit: cover;
-}
-.search-item-data {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-.search-item-topline {
-    display: flex;
-    flex-direction: row;
-    flex: 1;
-}
-.search-item-details {
-    display: flex;
-    flex-direction: row;
-    flex: 1;
-}
-
-.search-item-title {
-    margin: 0;
-}
-.search-item-duration {
-    color: var(--gray);
-    margin: 0 var(--xs);
-}
-.search-item-popularity {}
-.search-item-artists-list {}
-.search-item-artist {}
-.search-item-album-title {
-    color: var(--gray);
-    margin: 0 var(--xs);
-}
-.search-item-year {
-    color: var(--gray);
-    margin: 0 var(--xs);
-}
-.search-item-genres { color: var(--gray); }
-.search-item-album-type {
-    color: var(--gray);
-    font-style: italic;
-    margin: 0 var(--xs);
-    font-size: var(--s);
-}
-.search-item-plaintext { 
-    color: var(--gray);
-    font-style: italic;
-}
-
+/* Searchbar */
 .searchbar-input {
     padding: var(--s);
-    width: 300px;
+    width: 100%;
 }
-
 .searchbar-btn {
     padding: var(--s);
 }
-
-
-.content-type-radio {
-    color: red;
+.content-type-radio-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: var(--m);
+}
+.content-type-radio-legend {}
+.content-type-radio-btn {
     accent-color: var(--primary);
-
     &:focus { box-shadow: none; }
+}
+
+/* Search results */
+.search-item {
+    display: flex;
+    flex-direction: row;
+    height: var(--xxl);
+    margin: var(--s) 0;
+
+    min-width: 0;
+    width: 100%;
+}
+.search-item-image {
+    margin: 0 var(--s);
+    height: var(--xxl);
+    width: var(--xxl);
+    aspect-ratio: 1/1;
+    border-radius: var(--xs);
+}
+.search-item-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    text-wrap: nowrap;
+    overflow: hidden;
+
+    min-width: 0;
+    width: 100%;
+
+    &:hover { overflow: visible; }
+}
+.search-item-title {
+    font-size: var(--l);
+    flex: 0 0 63%;
+    overflow: hidden;
+    text-wrap: nowrap;
+
+    &:hover { overflow: visible; }
+}
+.search-item-artists-list {
+    font-style: italic;
+    text-wrap: nowrap;
+    flex: 0 0 37%;
+    overflow: hidden;
+}
+.search-item-plaintext { 
+    color: var(--gray);
+}
+.search-item-artist {
+    font-size: var(--m);
 }
