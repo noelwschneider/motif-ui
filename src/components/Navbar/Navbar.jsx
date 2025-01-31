@@ -4,6 +4,7 @@ import api from '../../api/_api';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../../UserContext';
+import { User } from 'react-feather';
 
 
 export default function Navbar() {
@@ -25,30 +26,17 @@ export default function Navbar() {
     return (
         <nav className={styles["navbar"]}>
             <div className={styles["navbar-container"]}>
-                <Link to="/" className={styles["navbar-logo"]}>
+                <Link to="/" className={styles["navbar-logo"] + ' clickable'}>
                     motif
                 </Link>
 
-                <ul className={styles["navbar-menu"]}>
-                    <li className={styles["navbar-item"]}>
-                        <Link to="/dummy1" className={styles["navbar-link"]}>Explore</Link>
-                    </li>
-                    <li className={styles["navbar-item"]}>
-                        <Link to="/dummy2" className={styles["navbar-link"]}>User</Link>
-                    </li>
-                </ul>
-
-                { user ? 
-                    <div>
-                        <p>{user.username}</p>
-                        <button onClick={handleLogout}>Logout</button>
-                    </div>
-                    : (
+                <div className={styles['navbar-user-options']}>
+                    { user ?  <User className={styles['user-icon'] + ' clickable'} /> : (
                         <Link to="/login" state={{ loginRedirect: `${location.pathname}?${location.search}` }}>
                             <button>Login</button>
                         </Link>
-                    )
-                }
+                    )}
+                </div>
                 
             </div>
         </nav>
