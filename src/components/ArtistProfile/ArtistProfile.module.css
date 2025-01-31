@@ -1,23 +1,78 @@
-.artist-profile {
+/* CONTAINERS */
+.artist-profile-container {
+    flex: 0 0 2;
+    min-width: 0;
+    max-width: 63%;
     display: flex;
     flex-direction: row;
+    padding: var(--m);
 }
-
 .artist-data-container {
-    flex: 1 1 0;
+    flex: 0 0 1;
+    min-width: 0;
+    width: 100%;
+    max-width: 50%;
+
     display: flex;
     flex-direction: column;
 }
+.motif-data-container {
+    flex: 0 0 3;
+    min-width: 0;
+    width: 100%;
+    max-width: 50%;
+    
+    position: sticky;
+    top: var(--m);
+    height: 100%;
+    max-height: 90vh;
+
+    /* background-color: var(--gray); */
+    background-color: black;
+    border-radius: var(--xs);
+    padding: var(--s);
+}
 
 /* ALBUMS */
-.album-row {
-    h2, p {
-        display: inline-block;
-        margin: 0 var(--s);
-    }
+.artist-name {
+    color: var(--primary);
 }
-.album-title {}
-.album-year { color: var(--gray) }
+.album-type-header {
+    /* text-decoration: underline 1px; */
+    font-style: italic;
+    /* color: var(--primary-tint); */
+}
+.album-row {
+    display: flex;
+    margin: var(--s) 0;
+    height: var(--xxl);
+    overflow: hidden;
+    text-wrap: nowrap;
+    &:hover { overflow: visible; }
+}
+.album-image {
+    margin: 0 var(--s);
+    height: var(--xxl);
+    width: var(--xxl);
+    aspect-ratio: 1/1;
+    border-radius: var(--xs);
+}
+.album-text {
+    display: flex;
+    flex-direction: column;
+}
+.album-year { 
+    color: var(--gray); 
+}
+.album-title {
+    font-size: var(--l);
+    overflow: hidden;
+    text-wrap: nowrap;
+    margin: 0;
+    padding: 0;
+
+    &:hover { overflow: visible; }
+}
 
 /* TRACKS */
 .track-list { margin: var(--s); }
@@ -25,10 +80,20 @@
 .track-title { margin: var(--s); }
 .track-duration { color: var(--gray); }
 
-/* MOTIF DATA */
-.motif-data-container {
-    flex: 1 1 0;
-}
 
-/* UTIL */
-.active { color: var(--primary); }
+/* ACTIVE ITEM */
+.add-review-button {
+    color: var(--primary);
+}
+.item-image {
+    border: 1px solid var(--light);
+}
+.item-title {
+    color: var(--primary);
+}
+.item-year {}
+.item-duration {}
+.item-explicit {
+    color: var(--red);
+    font-style: italic;
+}
