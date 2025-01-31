@@ -1,11 +1,12 @@
 import styles from './Search.module.css';
-import { useState } from 'react';
-import { formatDuration } from '../../util';
-import PopularityIcon from '../Icon/PopularityIcon';
+import { useEffect, useState } from 'react';
 import api from '../../api/_api';
 import { useLocation } from 'react-router-dom';
 
 
+// todo: proper load state
+// todo: get album popularity score into the return
+// todo: pagination
 export default function Search({ handleSearchClick }) {
     const location = useLocation();
     const querySearchParam = new URLSearchParams(location.search).get('q');
@@ -17,58 +18,69 @@ export default function Search({ handleSearchClick }) {
         albums: [],
         tracks: [],
     });
-    const [contentType, setContentType] = useState('albums');
-    const [error, setError] = useState(null);
+    const [contentType, setContentType] = useState('artists');
+    const [loading, setLoading] = useState(false);
     
-    // todo: load state
-    // todo: search w/o requiring user submit
-    const handleSearch = async (e) => {
-        e.preventDefault();
-        if (!query) {
-            setError('Please enter a search query.');
+    const handleSearch = async () => {
+        if (!query.trim()) {
+            setLoading(false);
+            setSearchResults({
+                metadata: {},
+                artists: [],
+                albums: [],
+                tracks: [],
+            });
             return;
-        }
-        setError(null);
+        };
 
+        setLoading(true);
         try {
             const response = await api.spotify.search({ 
                 query, 
                 type: 'album,artist,track', 
-                limit: 50, 
+                limit: 10, 
                 offset: 0 
             });
-            setSearchResults(response?.data || {});
+            setSearchResults({ ...response?.data });
         } catch (err) {
-            setError(err.message);
+            console.error(err);
+        } finally {
+            setLoading(false);
         }
     };
 
+    useEffect(() => {
+        const delay = 500; // ms
+        const handler = setTimeout(() => {
+            handleSearch();
+        }, delay);
+
+        return () => clearTimeout(handler);
+    }, [query]);
+
     return (
         <div className={styles['search-container']}>
-            <form className={styles['searchbar']}
-                onSubmit={handleSearch}
-            >
-                <input className={styles["searchbar-input"]}
-                    type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Search for music..."
-                />
-                <button className={styles["searchbar-btn"]} 
-                    type="submit"
-                >
-                    Search
-                </button>
-            </form>
+            <input className={styles["searchbar-input"]}
+                type="text"
+                value={query}
+                onChange={(e) => {
+                    setQuery(e.target.value);
+                    setLoading(true);
+                }}
+                placeholder="Search for music..."
+            />
 
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <p>Loading: {loading ? 'yep' : 'nope'}</p>
 
-            <fieldset>
-                <legend>Select Content Type</legend>
-                { ['albums', 'artists', 'tracks'].map((type, ix) => (
-                    <div key={`content-${type}-${ix}`}>
+            <fieldset className={styles['content-type-radio-group']}>
+                <legend className={styles['content-type-radio-legend']}>
+                    Select Content Type
+                </legend>
+
+                { ['artists', 'albums', 'tracks'].map((type, ix) => (
+                    <div key={`content-radio-${type}-${ix}`}>
                         <input id={`content-choice-${type}`}
-                            className={styles['content-type-radio']}
+                            className={styles['content-type-radio-btn']}
                             type="radio"
                             name="contentType"
                             value={type}
@@ -82,79 +94,43 @@ export default function Search({ handleSearchClick }) {
                     </div>
                 ))}
             </fieldset>
-
+            
             {searchResults[contentType].map((item) => (
                 <div className={styles['search-item']}
-                    key={item.id}
+                    key={`search-result-item-${item.spotifyId}`}
                 >
                     <img className={styles['search-item-image'] + ' clickable'}
-                        src={item?.images[0]?.url}
+                        src={item?.images[2]?.url}
                         alt={`Image for ${item?.title}`}
+                        onClick={() => handleSearchClick(contentType === 'artists' ? item.spotifyId : item.artists[0].spotifyId, item.spotifyId) }
                     />
 
-                    <div className={styles['search-item-data']}>
-                        <div className={styles['search-item-topline']}>
-                            {item.popularity !== undefined &&
-                                <PopularityIcon popularity={item.popularity} />
-                            }
+                    <div className={styles['search-item-text']}>
+                        <h2 className={styles['search-item-title'] + ' clickable'}
+                            onClick={() => handleSearchClick(contentType === 'artists' ? item.spotifyId : item.artists[0].spotifyId, item.spotifyId)}
+                        >
+                            {item.title}
+                        </h2>
 
-                            <h2 className={styles['search-item-title'] + ' clickable'}
-                                onClick={() => handleSearchClick(contentType === 'artists' ? item.spotifyId : item.artists[0].spotifyId, item.spotifyId, )}
-                            >
-                                {item.title}
-                            </h2>
-
-                            {item.durationMs &&
-                                <h3 className={styles['search-item-duration']}>
-                                    {formatDuration(item.durationMs)}
-                                </h3>
-                            }
-
-                            {item.albumType && item.albumType !== 'album' &&
-                                <sup className={styles['search-item-album-type']}>
-                                    {item.albumType}
-                                </sup>
-                            }
-                        </div>
-
-                        <div className={styles['search-item-details']}>
-                            {item.artists?.length > 0 && 
-                                <h3 className={styles['search-item-artists-list']}>
-                                    <span className={styles['search-item-plaintext']}>{'by '}</span>
-                                    {item.artists.map((artist, ix) => (
-                                        <span className={styles['search-item-artist'] + ' clickable'}
-                                            onClick={() => handleSearchClick(artist.spotifyId)}
-                                            key={`artist-title-${artist.spotifyId-ix}`}
-                                        >
-                                            {artist.title}
-                                            {ix+1 !== item.artists.length && 
-                                                <span className={styles['search-item-plaintext']}>, </span>
-                                            }   
-                                        </span>
-                                    ))}
-                                </h3>
-                            }
-
-                            {item.album?.title &&
-                                <h3 className={styles['search-item-album-title'] + ' clickable'}
-                                    onClick={() => handleSearchClick(album.artists[0].spotifyId, album.spotifyId)}
-                                >
-                                    {'| ' + item.album.title}
-                                </h3>
-                            }
-
-                            {item.releaseDate &&
-                                <h4 className={styles['search-item-year']}>
-                                    {item.releaseDate.slice(0,4)}
-                                </h4>
-                            }
-
-                            {item.genres?.length > 0 && 
-                                <h3 className={styles['search-item-genres']}>
-                                    {item.genres.join(', ')}
-                                </h3>
-                            }
-                        </div>
+                        { item.artists?.length > 0 && 
+                            <h3 className={styles['search-item-artists-list']}>
+                                <span className={styles['search-item-plaintext']}>
+                                    {'by '}
+                                </span>
+                                
+                                {item.artists.map((artist, ix) => (
+                                    <span className={styles['search-item-artist'] + ' clickable'}
+                                        onClick={() => handleSearchClick(artist.spotifyId)}
+                                        key={`artist-title-${artist.spotifyId}-${ix}`}
+                                    >
+                                        {artist.title}
+                                        {ix+1 !== item.artists.length && 
+                                            <span className={styles['search-item-plaintext']}>, </span>
+                                        }   
+                                    </span>
+                                ))}
+                            </h3>
+                        } 
                     </div>
                 </div>
             ))}
