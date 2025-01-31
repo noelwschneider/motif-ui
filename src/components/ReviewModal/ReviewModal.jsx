@@ -9,7 +9,7 @@ export default function ReviewModal({ isOpen, onClose, onSubmit, initialData }) 
         if (dialogRef.current) {
             dialogRef.current.close();
         }
-        onClose();
+        if (onClose) onClose();
     };
 
     const handleSubmit = (event) => {
@@ -20,7 +20,7 @@ export default function ReviewModal({ isOpen, onClose, onSubmit, initialData }) 
             comment: formData.get('comment'),
             isPrivate: formData.get('isPrivate'),
         };
-        onSubmit(reviewData);
+        if (onSubmit) onSubmit(reviewData);
         handleClose();
     };
 
