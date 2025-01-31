@@ -7,8 +7,6 @@
     --blue: #80CCFF;
     --purple: #814B78;
 
-    --black: #000;
-    --gray-0: #000;
     --gray-1: #111;
     --gray-2: #222;
     --gray-3: #333;
@@ -23,16 +21,17 @@
     --gray-c: #ccc;
     --gray-d: #ddd;
     --gray-e: #eee;
-    --gray-f: #fff;
-    --white: #fff;
 
     --dark: var(--gray-2);
     --light: var(--gray-d);
     --gray: var(--gray-8);
 
     --primary: var(--blue);
+    --primary-tint: color-mix(in srgb, var(--primary) 90%, white);
+    --primary-shade: color-mix(in srgb, var(--primary) 90%, black);
+
     --secondary: var(--light);
-    --line: var(--white);
+    --line: white;
     --fill: var(--dark);
     --danger: var(--red);
 }
@@ -41,12 +40,14 @@
 :root {
     --BASE-SIZE: 18px;
     
+    --xxs: 0.2rem;
     --xs: 0.35rem;
     --s: 0.6rem;
     --m: 1rem;
     --l: 1.6rem;
     --xl: 2.5rem;
-    --line-height: 1.5;
+    --xxl: 4rem;
+    --line-height: 1.6;
 }
 
 /* fontface */
