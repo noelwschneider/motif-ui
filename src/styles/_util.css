@@ -34,8 +34,8 @@
 .text-primary { color: var(--primary); }
 .text-secondary { color: var(--secondary); }
 .text-danger { color: var(--danger); }
-.text-white { color: var(--white); }
-.text-black { color: var(--black); }
+.text-white { color: white; }
+.text-black { color: black; }
 .border-danger { border-color: var(--danger); }
 
 /* borders */
@@ -51,6 +51,5 @@
 /* feedback */
 .clickable:hover {
     cursor: pointer;
-    /* color: red; */
     filter: brightness(60%);
 }

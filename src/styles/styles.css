@@ -2,6 +2,12 @@
 @import '_util.css';
 @import '_theme.css';
 
+html {
+  width: calc(100vw - var(--s));
+  max-width: 100%;
+  border: 1px solid pink;
+}
+
 body {
   font-size: var(--BASE-SIZE);
   font-family: var(--ff);
