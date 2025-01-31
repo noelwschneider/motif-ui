@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { getCookie } from '../util';
 import addAuth from './auth';
-import addCatalogs from './catalog';
-import addReviews from './review';
+import addCatalogs from './catalogs';
+import addReviews from './reviews';
 import addSpotify from './spotify';
 
 
