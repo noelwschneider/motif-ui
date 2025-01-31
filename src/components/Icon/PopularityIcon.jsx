@@ -1,4 +1,4 @@
-import { Activity, BarChart, Coffee, TrendingUp, Zap } from 'react-feather';
+import { BarChart } from 'react-feather';
 import styles from './Icon.module.css';
 
 export default function PopularityIcon({ popularity, scale=100 }) {
@@ -22,12 +22,8 @@ export default function PopularityIcon({ popularity, scale=100 }) {
     };
 
     return (
-        <>
-            {/* <Activity className={styles[`popularity-icon-${heat}`]} /> */}
-
-            <BarChart className={styles[`popularity-icon-${heat}`]} />
-
-            {/* <TrendingUp className={styles[`popularity-icon-${heat}`]} /> */}
-        </>
+        <BarChart className={styles[`popularity-icon-${heat}`]} 
+            size={'100%'}
+        />
     )
-}
+};

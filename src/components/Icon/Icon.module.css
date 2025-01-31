@@ -9,15 +9,8 @@
     }
 }
 
-
-.popularity-icon-wtf { color: var(--red); }
-.popularity-icon-hot { color: var(--orange); }
-.popularity-icon-warm { color: var(--yellow); }
-.popularity-icon-cool { color: var(--white); }
-.popularity-icon-cold { color: var(--blue); }
-
-.popularity-icon-wtf { color: color-mix(in srgb, var(--red) 100%, var(--white)); }
-.popularity-icon-hot { color: color-mix(in srgb, var(--red) 75%, var(--white)); }
-.popularity-icon-warm { color: color-mix(in srgb, var(--red) 50%, var(--white)); }
-.popularity-icon-cool { color: color-mix(in srgb, var(--red) 25%, var(--white)); }
-.popularity-icon-cold { color: color-mix(in srgb, var(--red) 0%, var(--white)); }
+.popularity-icon-wtf { color: color-mix(in srgb, var(--red) 100%, white); }
+.popularity-icon-hot { color: color-mix(in srgb, var(--red) 75%, white); }
+.popularity-icon-warm { color: color-mix(in srgb, var(--red) 50%, white); }
+.popularity-icon-cool { color: color-mix(in srgb, var(--red) 25%, white); }
+.popularity-icon-cold { color: color-mix(in srgb, var(--red) 0%, white); }
