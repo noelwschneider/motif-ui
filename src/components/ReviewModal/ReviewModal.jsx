@@ -1,71 +1,157 @@
-import { useRef } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { UserContext } from '../../UserContext';
 import styles from './ReviewModal.module.css';
+import api from '../../api/_api';
+import { Star, Trash2 } from 'react-feather';
 
 
-export default function ReviewModal({ isOpen, onClose, onSubmit, initialData }) {
+// todo: close if no spotifyId in data prop
+export default function ReviewModal({ 
+    data, 
+    isOpen,
+    onClose, 
+    onSubmit,
+}) {
+    const [rating, setRating] = useState(data?.rating || 0);
+    const [hoverRating, setHoverRating] = useState(0);
+
+    const displayRating = hoverRating || rating;
     const dialogRef = useRef(null);
+    const { user } = useContext(UserContext);
+
+    useEffect(() => {
+        // prevent scrolling when open
+        document.body.style.overflow = 'hidden';
+        if (dialogRef?.current?.open && !isOpen) {
+          dialogRef.current?.close();
+        } else if (!dialogRef?.current?.open && isOpen) {
+          dialogRef.current?.showModal();
+        }
+
+        return () => document.body.style.overflow = 'unset';
+    }, [isOpen])
 
     const handleClose = () => {
         if (dialogRef.current) {
             dialogRef.current.close();
-        }
+        };
         if (onClose) onClose();
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
-        const reviewData = {
-            rating: formData.get('rating'),
-            comment: formData.get('comment'),
-            isPrivate: formData.get('isPrivate'),
+        const comment = formData.get('comment')
+        const isPrivate = formData.get('isPrivate') ? true : false;
+
+        try {
+            // id flag determines submit action (POST for new review, PUT for existing review)
+            if (data.id) {
+                await api.reviews.update(data.id, {
+                    comment,
+                    isPrivate,
+                    rating,
+                });
+            } else {
+                await api.reviews.create({
+                    comment,
+                    isPrivate,
+                    rating,
+                    spotifyArtistId: data.spotifyArtistId,
+                    spotifyId: data.spotifyId
+                });
+            }
+        } catch (err) {
+            console.error(err);
         };
-        if (onSubmit) onSubmit(reviewData);
+
+        if (onSubmit) onSubmit();
         handleClose();
     };
 
-    const deleteReview = () => {};
+    const handleDelete = async () => {
+        try {
+            await api.reviews.delete(data.id)
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
-    return (
-        <dialog ref={dialogRef} open={isOpen} className={styles['review-modal']}>
-            <form onSubmit={handleSubmit} className={styles["review-form"]}>
-                <h2>{initialData ? 'Edit Review' : 'Create Review'}</h2>
+    return (<>
+        <dialog className={styles['review-modal']} 
+            ref={dialogRef} 
+            open={isOpen}
+        >
+            <form className={styles["review-form"]}
+                onSubmit={handleSubmit}
+            >
+                <h1 className={styles['modal-title']}>
+                    {data.title}
+                </h1>
 
-                <label htmlFor="rating">Rating:</label>
-                <input
-                    type="number"
-                    id="rating"
-                    name="rating"
-                    min="1"
-                    max="10"
-                    defaultValue={initialData?.rating || ''}
-                    required 
-                />
+                { data.id && 
+                    <Trash2 className={styles['delete-btn']}
+                        onClick={handleDelete}
+                    >
+                        Delete
+                    </Trash2>
+                }
 
-                <label htmlFor="comment">Review:</label>
-                <textarea
+                <textarea className={styles['comment-text']}
                     id="comment"
                     name="comment"
-                    rows="4"
-                    defaultValue={initialData?.comment || ''}
-                    placeholder="Write your review here..."
+                    defaultValue={data?.comment || ''}
+                    placeholder="Write your review here"
                 />
 
-                <label htmlFor="isPrivate" className={styles["privacy-checkbox"]}>
-                    <input
+                <label className={styles["privacy-checkbox-label"]} 
+                    htmlFor="isPrivate"
+                >
+                    <input className={styles["privacy-checkbox"]}
                         type="checkbox"
                         id="isPrivate"
                         name="isPrivate"
-                        defaultChecked={initialData?.isPrivate || false}
+                        defaultChecked={data?.isPrivate || false}
                     />
                     Private
                 </label>
 
-                <div className={styles["modal-actions"]}>
-                    <button type="submit">Save</button>
-                    <button type="button" onClick={handleClose}>Cancel</button>
+                <div className={styles['rating-input']}>
+                    <div className={styles['star-container']}>
+                        {[1, 2, 3, 4, 5].map((value) => (
+                        <div className={styles['star-wrapper']}
+                            key={value}
+                            onMouseEnter={() => setHoverRating(value)}
+                            onMouseLeave={() => setHoverRating(0)}
+                            onClick={() => setRating(value)}
+                        >
+                            <Star className={styles['star-empty']} />
+
+                            {value <= displayRating && (
+                                <Star className={
+                                    hoverRating ? styles['star-hover'] : styles['star-full']
+                                }/>
+                            )}
+                        </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className={styles["modal-buttons"]}>
+                    <button className={styles['cancel-btn']}
+                        type="button" onClick={handleClose}>
+                        Cancel
+                    </button>
+
+                    <button className={styles['save-btn']} type="submit">
+                        Save
+                    </button>
                 </div>
             </form>
         </dialog>
-    );
+        
+        <div className={styles['modal-container']}
+            onClick={handleClose}
+        ></div>
+    </>);
 };
