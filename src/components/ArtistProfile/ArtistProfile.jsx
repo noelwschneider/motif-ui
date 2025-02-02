@@ -3,6 +3,7 @@ import { Plus } from 'react-feather';
 import { useState } from 'react';
 import ReviewModal from '../ReviewModal/ReviewModal';
 import AlbumList from './AlbumList';
+import { Star } from 'react-feather';
 
 
 // todo: support multiple artists by allowing user to toggle between them. Load both discographies / reviews / etc.
@@ -16,12 +17,12 @@ import AlbumList from './AlbumList';
     // stretch: suspense/placeholder UI
 export default function ArtistProfile({ 
     albumIndex,
-    item,
     artistProfile,
-    handleClick 
+    handleClick,
+    item,
 }) {
     const [modalOpen, setModalOpen] = useState(false);
-    const [showAlbums, setShowAlbums] = useState('albums');
+    const [showAlbums, setShowAlbums] = useState();
     
     return (
         <div className={styles['artist-profile-container']}>
@@ -57,46 +58,62 @@ export default function ArtistProfile({
                 <img className={styles['item-image']}
                     src={item.imageUrl}
                 ></img>
-                <h1 className={styles['item-title']}>{item.title}</h1>
 
-                { item.releaseYear && 
-                    <span className={styles['item-year']}>{item.releaseYear}</span>
-                }
+                <h1 className={styles['item-title']}>
+                    {item.title}
+                </h1>
+                
+                <h2 className={styles['reviews-header']}>
+                    Reviews
+                </h2>
 
-                { item.duration && 
-                    <span className={styles['item-duration']}>{item.duration}
-                    </span>
-                }
-                
-                { item.explicit && 
-                    <span className={styles['item-explicit']}>explicit</span>
-                }
-                
-                
+                {/* todo: average review score */}
+                {/* todo: total reviews */}
+
                 <Plus className={styles['add-review-button'] + ' clickable'} 
                     onClick={() => setModalOpen(true)}
                 />
-                <h2>Reviews</h2>
 
                 { artistProfile?.reviews?.[item.spotifyId]?.map((review, ix) => (
-                    <div key={`profile-item-${item.spotifyId}-review-${ix}`}>
-                        <div className="review-id">{review.reviewId}</div>
-                        <div className="spotify-id">{review.spotifyId}</div>
-                        <div className="user-id">{review.userId}</div>
-                        <div className="comment">{review.comment}</div>
-                        <div className="rating">{review.rating}</div>
-                        <div className="created-date">{review.createdDate}</div>
-                        <div className="upvotes">{review.upvotes}</div>
-                        <div>TODO: get username</div>
+                    <div className={styles['item-review']}
+                        key={`profile-item-${item.spotifyId}-review-${ix}`}
+                    >
+                        <div className={styles['review-stars-container']}>
+                            { Array.from({length: review.rating}, () => (
+                                <Star className={styles['review-star']} />
+                            ))}
+                            { Array.from({length: 5 - review.rating}, () => (
+                                <Star className={styles['review-star-empty']} />
+                            ))}
+                        </div>
+
+                        <h3 className={styles['review-username'] + ' clickable'}>
+                            username_placeholder
+                        </h3>
+
+                        { review.comment && 
+                            <p className={styles['review-comment']}>
+                                "{review.comment}"
+                            </p>
+                        }
+                       
                     </div>
                 ))}
             </div>
             
-            <ReviewModal 
-                isOpen={modalOpen}
-                onClose={() => setModalOpen(false)}
-                initialData={null}
-            />
+            {/* todo: check whether user already has a review saved for the item, set data prop accordingly */}
+            { modalOpen &&
+                <ReviewModal 
+                    isOpen={modalOpen}
+                    onClose={() => setModalOpen(false)}
+                    data={{
+                        spotifyArtistId: item.spotifyArtistId,
+                        spotifyId: item.spotifyId,
+                        title: item.title,
+                    }}
+                    onSubmit={() => handleClick(item.spotifyArtistId, item.spotifyId, albumIndex)}
+                />
+            } 
         </div>
     );
 };
