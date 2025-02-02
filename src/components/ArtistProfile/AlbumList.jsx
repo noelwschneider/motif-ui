@@ -25,13 +25,12 @@ export default function AlbumList({
                            )}
                         ></img>
 
+
                         <div className={styles['album-text']}>
                             <h2 className={ styles['album-title'] 
                                     + ' clickable' 
-                                    + ( activeItemId === album.spotifyId ? 
-                                        ' ' + styles['active']
-                                        : ''
-                                    )}
+                                    + ( activeItemId === album.spotifyId ? ' text-primary' : ''
+                                )}
                                 onClick={() => (albumIndex === ix ?
                                     handleClick(artistId)
                                     : handleClick(artistId, album.spotifyId, ix)
@@ -60,7 +59,7 @@ export default function AlbumList({
                                     <span className={styles['track-title'] 
                                         + ' clickable' 
                                         + ( activeItemId === track.spotifyId ? 
-                                            ' ' + styles['active']
+                                            ' text-primary'
                                             : ''
                                         )}
                                         onClick={() => {handleClick(artistId, track.spotifyId, ix)}}

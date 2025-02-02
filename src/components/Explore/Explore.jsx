@@ -7,7 +7,6 @@ import { formatDuration } from '../../util';
 
 
 export default function Explore() {
-    const [artistId, setArtistId] = useState();
     const [artistProfiles, setArtistProfiles] = useState({});
     const [itemData, setItemData] = useState(null);
     const [albumIndex, setAlbumIndex] = useState(null);
@@ -62,7 +61,7 @@ export default function Explore() {
 
             {itemData &&
                 <ArtistProfile 
-                    artistProfile={artistProfiles[itemData.artistId]}
+                    artistProfile={artistProfiles[itemData.spotifyArtistId]}
                     albumIndex={albumIndex}
                     item={itemData}
                     handleClick={handleClick}
@@ -79,7 +78,7 @@ function getSelectedItemData(itemId, albumIndex, artistProfile) {
     if (itemId === artistProfile?.spotifyId) {
         return {
             spotifyId: artistProfile.spotifyId,
-            artistId: artistProfile.spotifyId,
+            spotifyArtistId: artistProfile.spotifyId,
             title: artistProfile.title,
             popularity: artistProfile.popularity,
             imageUrl: artistProfile.images[1].url,
@@ -93,7 +92,7 @@ function getSelectedItemData(itemId, albumIndex, artistProfile) {
         const albumObj = artistProfile?.albums[albumIndex];
         return {
             spotifyId: albumObj?.spotifyId,
-            artistId: artistProfile.spotifyId,
+            spotifyArtistId: artistProfile.spotifyId,
             title: albumObj?.title,
             popularity: albumObj?.popularity,
             imageUrl: albumObj?.images[1]?.url,
@@ -109,7 +108,7 @@ function getSelectedItemData(itemId, albumIndex, artistProfile) {
             if (track?.spotifyId === itemId) {
                 return {
                     spotifyId: track?.spotifyId,
-                    artistId: artistProfile.spotifyId,
+                    spotifyArtistId: artistProfile.spotifyId,
                     title: track?.title,
                     popularity: 'todo',
                     imageUrl: albumObj?.images[1]?.url,

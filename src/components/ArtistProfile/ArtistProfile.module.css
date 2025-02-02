@@ -1,12 +1,14 @@
 /* CONTAINERS */
 .artist-profile-container {
-    flex: 0 0 2;
+    flex: 1 1 75%;
     min-width: 0;
-    max-width: 63%;
+    max-width: 75%;
     display: flex;
     flex-direction: row;
-    padding: var(--m);
+    padding: var(--s);
 }
+
+/* ARTIST CONTENT */
 .artist-data-container {
     flex: 0 0 1;
     min-width: 0;
@@ -16,31 +18,14 @@
     display: flex;
     flex-direction: column;
 }
-.motif-data-container {
-    flex: 0 0 3;
-    min-width: 0;
-    width: 100%;
-    max-width: 50%;
-    
-    position: sticky;
-    top: var(--m);
-    height: 100%;
-    max-height: 90vh;
 
-    /* background-color: var(--gray); */
-    background-color: black;
-    border-radius: var(--xs);
-    padding: var(--s);
-}
-
-/* ALBUMS */
 .artist-name {
     color: var(--primary);
+    cursor: pointer;
 }
 .album-type-header {
-    /* text-decoration: underline 1px; */
     font-style: italic;
-    /* color: var(--primary-tint); */
+    width: min-content;
 }
 .album-row {
     display: flex;
@@ -70,8 +55,9 @@
     text-wrap: nowrap;
     margin: 0;
     padding: 0;
+    width: min-content;
 
-    &:hover { overflow: visible; }
+    &:hover { overflow-x: visible; }
 }
 
 /* TRACKS */
@@ -82,11 +68,34 @@
 
 
 /* ACTIVE ITEM */
+.motif-data-container {
+    flex: 0 0 3;
+    min-width: 0;
+    width: 324px;
+    max-width: 50%;
+    
+    position: sticky;
+    top: var(--m);
+    height: calc(100vh - 100px);
+    
+    background-color: black;
+    border-radius: var(--s);
+    padding: var(--s);
+    margin-left: auto;
+
+    overflow-y: scroll;
+}
 .add-review-button {
     color: var(--primary);
 }
 .item-image {
     border: 1px solid var(--light);
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: var(--s);
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 1/1;
 }
 .item-title {
     color: var(--primary);
@@ -96,4 +105,42 @@
 .item-explicit {
     color: var(--red);
     font-style: italic;
+}
+
+.reviews-header {
+    display: inline-block;
+}
+.item-review {
+    margin: var(--s);
+    background-color: var(--gray-shade);
+    border-radius: var(--s);
+    padding: var(--s);
+    line-height: 1;
+}
+.review-stars-container {
+    display: inline-block;
+    margin-right: var(--s);
+}
+.review-star {
+    stroke: var(--primary);
+    fill: var(--primary);
+    height: var(--s);
+    width: var(--s);
+    display: inline-block;
+}
+.review-star-empty {
+    stroke: var(--primary);
+    fill: none;
+    height: var(--s);
+    width: var(--s);
+    display: inline-block;
+}
+.review-username {
+    display: inline-block;
+    color: var(--light);
+}
+.review-comment {
+    font-style: italic;
+    display: block;
+    margin-left: var(--s);
 }
