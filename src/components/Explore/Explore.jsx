@@ -16,27 +16,44 @@ export default function Explore() {
     const handleClick = async (selectedArtistId, selectedItemId, ix) => {
         // if only 1 arg, assume user clicked the Artist's name
         const itemId = selectedItemId || selectedArtistId;
-        let artistProfile;
-        if (artistProfiles[selectedArtistId]) {
-            artistProfile = artistProfiles[selectedArtistId];
-        } else {
-            try {
-                const artistProfileResponse = await api.spotify.artistProfile(selectedArtistId);
-                setArtistProfiles({
-                    ...artistProfiles, 
-                    [selectedArtistId]: artistProfileResponse?.data
-                });
-                artistProfile = artistProfileResponse?.data;
-            } catch (err) {
-                // todo: improve error handling
-                console.error(err);
-            };
-        };
-        if (!artistProfile) return null;
+
+        const artistProfile = await fetchArtistProfile(selectedArtistId);
+
+        // reviews are always fetched on rerender so reviews saved from within the artistProfile component are immediately available
+        artistProfile.reviews = await fetchReviews(selectedArtistId);
+        
+        setArtistProfiles({
+            ...artistProfiles, 
+            [selectedArtistId]: artistProfile
+        });
+
+        
         const albumIx = ix || getAlbumIndex(itemId, artistProfile);
         setAlbumIndex(albumIx);
         setItemData(getSelectedItemData(itemId, albumIx, artistProfile));
-        setArtistId(artistProfile.spotifyId);
+    };
+
+    const fetchReviews = async (artistId) => {
+        try {
+            const reviews = await api.reviews.getArtist(artistId);
+            return reviews?.data;
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const fetchArtistProfile = async (artistId) => {
+        if (artistProfiles[artistId]) {
+            return artistProfiles[artistId];
+        };
+
+        try {
+            const artistProfileResponse = await api.spotify.artistProfile(artistId);
+            return artistProfileResponse?.data;
+        } catch (err) {
+            console.error(err);
+            return null;
+        };
     };
 
     return (
