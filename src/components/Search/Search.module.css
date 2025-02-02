@@ -1,8 +1,17 @@
 .search-container {
-    flex: 0 0 1;
-    min-width: 0;
-    max-width: 37%;
-    padding: var(--m);
+    flex: 1 1 25%;
+    padding: var(--m) var(--s);
+    background-color: var(--primary-shade);
+
+    min-width: 0%;
+    transition: flex-basis 1s ease-in-out;
+    text-overflow: ellipsis;
+
+    min-height: calc(100vh - 100px);
+    height: stretch;
+
+    border-radius: var(--s);
+    margin: var(--xs);
 }
 
 /* Searchbar */
@@ -14,26 +23,50 @@
     padding: var(--s);
 }
 .content-type-radio-group {
+    min-width: max-content;
     display: flex;
     flex-direction: row;
     justify-content: start;
     gap: var(--m);
+    border-radius: var(--s);
 }
-.content-type-radio-legend {}
+.content-type-radio-legend {
+    
+}
 .content-type-radio-btn {
     accent-color: var(--primary);
     &:focus { box-shadow: none; }
 }
 
 /* Search results */
+.skeleton-item {
+    display: flex;
+    flex-direction: row;
+    height: var(--xxl);
+    margin: var(--s) 0;
+    align-items: end;
+}
+.skeleton-img {
+    height: var(--xxl);
+    width: var(--xxl);
+    aspect-ratio: 1/1;
+    margin: 0 var(--s);
+    border-radius: var(--s);
+    background-color: var(--gray);
+    border: 1px solid var(--dark);
+}
+.skeleton-text {
+    background-color: var(--gray-tint);
+    height: 50%;
+    width: 100%;
+    border-radius: var(--s);
+    border: 1px solid var(--dark);
+}
 .search-item {
     display: flex;
     flex-direction: row;
     height: var(--xxl);
     margin: var(--s) 0;
-
-    min-width: 0;
-    width: 100%;
 }
 .search-item-image {
     margin: 0 var(--s);
@@ -41,26 +74,20 @@
     width: var(--xxl);
     aspect-ratio: 1/1;
     border-radius: var(--xs);
+    border: 1px solid var(--dark);
 }
 .search-item-text {
     display: flex;
     flex-direction: column;
     justify-content: end;
-    text-wrap: nowrap;
     overflow: hidden;
-
-    min-width: 0;
-    width: 100%;
-
-    &:hover { overflow: visible; }
+    white-space: nowrap;
 }
 .search-item-title {
     font-size: var(--l);
     flex: 0 0 63%;
-    overflow: hidden;
     text-wrap: nowrap;
 
-    &:hover { overflow: visible; }
 }
 .search-item-artists-list {
     font-style: italic;
@@ -69,7 +96,7 @@
     overflow: hidden;
 }
 .search-item-plaintext { 
-    color: var(--gray);
+    color: var(--primary-tint);
 }
 .search-item-artist {
     font-size: var(--m);
