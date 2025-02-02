@@ -24,16 +24,22 @@
 
     --dark: var(--gray-2);
     --light: var(--gray-d);
+
     --gray: var(--gray-8);
+    --gray-tint: color-mix(in srgb, var(--gray) 63%, white);
+    --gray-shade: color-mix(in srgb, var(--gray) 63%, black);
 
     --primary: var(--blue);
-    --primary-tint: color-mix(in srgb, var(--primary) 90%, white);
-    --primary-shade: color-mix(in srgb, var(--primary) 90%, black);
+    --primary-tint: color-mix(in srgb, var(--primary) 63%, white);
+    --primary-shade: color-mix(in srgb, var(--primary) 63%, black);
 
     --secondary: var(--light);
     --line: white;
     --fill: var(--dark);
+
     --danger: var(--red);
+    --danger-tint: color-mix(in srgb, var(--danger) 63%, white);
+    --danger-shade: color-mix(in srgb, var(--danger) 63%, black);
 }
 
 /* size */

@@ -5,7 +5,6 @@
 html {
   width: calc(100vw - var(--s));
   max-width: 100%;
-  border: 1px solid pink;
 }
 
 body {
@@ -17,10 +16,11 @@ body {
   margin: 0;
   padding: 0;
   height: calc(100vh - 12px);
+  width: 100vw;
+  scrollbar-gutter: stable both-edges;
 }
 
 #content-wrapper {
-  padding: var(--s);
 }
 
 /* typography */
