@@ -70,8 +70,6 @@ export default function Search({ handleSearchClick }) {
                 placeholder="Search for music..."
             />
 
-            <p>Loading: {loading ? 'yep' : 'nope'}</p>
-
             <fieldset className={styles['content-type-radio-group']}>
                 <legend className={styles['content-type-radio-legend']}>
                     Select Content Type
@@ -95,7 +93,18 @@ export default function Search({ handleSearchClick }) {
                 ))}
             </fieldset>
             
-            {searchResults[contentType].map((item) => (
+            { !loading && searchResults[contentType].length === 0 &&
+                <h1>Search results will display here</h1>
+            }
+    
+            { loading ? Array.from({length: 10}, () => (
+                <div className={styles['skeleton-item']}>
+                    <div className={styles['skeleton-img']}></div>
+                    <div className={styles['skeleton-text']}></div>
+                </div>
+            ))
+        
+            : searchResults[contentType].map((item) => (
                 <div className={styles['search-item']}
                     key={`search-result-item-${item.spotifyId}`}
                 >
@@ -133,7 +142,8 @@ export default function Search({ handleSearchClick }) {
                         } 
                     </div>
                 </div>
-            ))}
+            ))
+            }
         </div>
     );
 };
