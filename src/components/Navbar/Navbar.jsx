@@ -1,26 +1,24 @@
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import api from '../../api/_api';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../UserContext';
 import { User } from 'react-feather';
+import LoginModal from './LoginModal';
 
 
 export default function Navbar() {
-    const location = useLocation();
-    const navigate = useNavigate();
+    const [modalOpen, setModalOpen] = useState(false);
     const { user, setUser } = useContext(UserContext);
 
     const handleLogout = async () => {
         try {
             await api.auth.logout();
-            navigate('/');
         } catch (err) {
             console.error('Logout failed', err);
         } finally {
             setUser(null);
-        }
+        };
     };
 
     return (
@@ -30,13 +28,31 @@ export default function Navbar() {
                     motif
                 </Link>
 
+                {/* placing here instead of end of component to simplify horizontal spacing */}
+                { modalOpen && 
+                    <LoginModal 
+                        isOpen={modalOpen}
+                        onClose={() => setModalOpen(false)}
+                    />
+                }
+
                 <div className={styles['navbar-user-options']}>
-                    { user ?  <User className={styles['user-icon'] + ' clickable'} /> : (
-                        <Link to="/login" state={{ loginRedirect: `${location.pathname}?${location.search}` }}>
-                            <button>Login</button>
-                        </Link>
-                    )}
+                    <div className={styles['user-dropdown']}>
+                    { user ? 
+                        <div className={styles['navbar-user']}>
+                            <h3>{user.displayName}</h3>
+                            <User className={styles['user-icon'] + ' clickable'} /> 
+                            <button onClick={handleLogout}>Logout</button>
+                        </div>
+                        : <button className={styles['login-btn']}
+                            onClick={() => setModalOpen(true)}
+                        >
+                            Login
+                        </button>
+                    }
+                    </div>
                 </div>
+
                 
             </div>
         </nav>
