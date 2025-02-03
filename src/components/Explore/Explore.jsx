@@ -10,6 +10,7 @@ export default function Explore() {
     const [artistProfiles, setArtistProfiles] = useState({});
     const [itemData, setItemData] = useState(null);
     const [albumIndex, setAlbumIndex] = useState(null);
+    const [searchOpen, setSearchOpen] = useState(true);
 
     // todo: accept tracks w/ multiple artists
     const handleClick = async (selectedArtistId, selectedItemId, ix) => {
@@ -26,10 +27,10 @@ export default function Explore() {
             [selectedArtistId]: artistProfile
         });
 
-        
         const albumIx = ix || getAlbumIndex(itemId, artistProfile);
         setAlbumIndex(albumIx);
         setItemData(getSelectedItemData(itemId, albumIx, artistProfile));
+        setSearchOpen(false);
     };
 
     const fetchReviews = async (artistId) => {
@@ -57,16 +58,18 @@ export default function Explore() {
 
     return (
         <div className={styles['explore-container']}>
-            <Search handleSearchClick={handleClick} />
+            <Search 
+                handleSearchClick={handleClick} 
+                searchOpen={searchOpen} 
+                setSearchOpen={setSearchOpen}
+            />
 
-            {itemData &&
-                <ArtistProfile 
-                    artistProfile={artistProfiles[itemData.spotifyArtistId]}
-                    albumIndex={albumIndex}
-                    item={itemData}
-                    handleClick={handleClick}
-                />
-            }
+            <ArtistProfile 
+                artistProfile={artistProfiles[itemData?.spotifyArtistId]}
+                albumIndex={albumIndex}
+                item={itemData}
+                handleClick={handleClick}
+            />
         </div>
     );
 };

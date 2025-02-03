@@ -4,64 +4,59 @@
     background-color: var(--primary-shade);
 
     min-width: 0%;
-    transition: flex-basis 1s ease-in-out;
-    text-overflow: ellipsis;
+    transition: flex-basis 1s ease-out;
+    text-overflow: hidden;
+    overflow-x: hidden;
 
     min-height: calc(100vh - 100px);
-    height: stretch;
 
     border-radius: var(--s);
     margin: var(--xs);
+}
+.expand { 
+    flex: 1 0 25%;
+    transition: flex-basis 0.3s ease-out;
+    min-width: 25%;
+}
+.collapse { 
+    flex: 0 0 1%; 
+    cursor: pointer;
+    transition: flex-basis 0.4s ease-in-out;
+    background-color: var(--primary);
+
+    &:hover { 
+        background-color: var(--primary-shade);
+        flex: 0 0 3%;
+    }
 }
 
 /* Searchbar */
 .searchbar-input {
     padding: var(--s);
     width: 100%;
+    margin-bottom: var(--s);
 }
 .searchbar-btn {
     padding: var(--s);
 }
 .content-type-radio-group {
-    min-width: max-content;
+    width: 100%;
+    width: fit-content;
     display: flex;
     flex-direction: row;
     justify-content: start;
-    gap: var(--m);
+    gap: var(--s);
     border-radius: var(--s);
+    margin: 0;
+    padding: var(--xs);
 }
-.content-type-radio-legend {
-    
-}
+.content-type-radio-legend {}
 .content-type-radio-btn {
     accent-color: var(--primary);
     &:focus { box-shadow: none; }
 }
 
 /* Search results */
-.skeleton-item {
-    display: flex;
-    flex-direction: row;
-    height: var(--xxl);
-    margin: var(--s) 0;
-    align-items: end;
-}
-.skeleton-img {
-    height: var(--xxl);
-    width: var(--xxl);
-    aspect-ratio: 1/1;
-    margin: 0 var(--s);
-    border-radius: var(--s);
-    background-color: var(--gray);
-    border: 1px solid var(--dark);
-}
-.skeleton-text {
-    background-color: var(--gray-tint);
-    height: 50%;
-    width: 100%;
-    border-radius: var(--s);
-    border: 1px solid var(--dark);
-}
 .search-item {
     display: flex;
     flex-direction: row;
@@ -100,4 +95,29 @@
 }
 .search-item-artist {
     font-size: var(--m);
+}
+
+/* Skeleton UI */
+.skeleton-item {
+    display: flex;
+    flex-direction: row;
+    height: var(--xxl);
+    margin: var(--s) 0;
+    align-items: end;
+}
+.skeleton-img {
+    height: var(--xxl);
+    width: var(--xxl);
+    aspect-ratio: 1/1;
+    margin: 0 var(--s);
+    border-radius: var(--s);
+    background-color: var(--gray);
+    border: 1px solid var(--dark);
+}
+.skeleton-text {
+    background-color: var(--gray-tint);
+    height: 50%;
+    width: 100%;
+    border-radius: var(--s);
+    border: 1px solid var(--dark);
 }
