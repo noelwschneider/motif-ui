@@ -21,7 +21,7 @@ export default function Login() {
       navigate(location.state.loginRedirect || '/home');
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred');
-    }
+    };
   };
 
   return (
