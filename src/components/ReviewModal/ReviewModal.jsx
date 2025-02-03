@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { UserContext } from '../../UserContext';
 import styles from './ReviewModal.module.css';
 import api from '../../api/_api';
-import { Star, Trash2 } from 'react-feather';
+import { Star, Trash2, X } from 'react-feather';
 
 
 // todo: close if no spotifyId in data prop
@@ -22,14 +22,15 @@ export default function ReviewModal({
     useEffect(() => {
         // prevent scrolling when open
         document.body.style.overflow = 'hidden';
+        
         if (dialogRef?.current?.open && !isOpen) {
           dialogRef.current?.close();
         } else if (!dialogRef?.current?.open && isOpen) {
           dialogRef.current?.showModal();
-        }
+        };
 
         return () => document.body.style.overflow = 'unset';
-    }, [isOpen])
+    }, [isOpen]);
 
     const handleClose = () => {
         if (dialogRef.current) {
@@ -82,72 +83,83 @@ export default function ReviewModal({
             ref={dialogRef} 
             open={isOpen}
         >
-            <form className={styles["review-form"]}
-                onSubmit={handleSubmit}
-            >
+            <div className={styles['modal-header']}>
                 <h1 className={styles['modal-title']}>
                     {data.title}
                 </h1>
 
-                { data.id && 
-                    <Trash2 className={styles['delete-btn']}
-                        onClick={handleDelete}
-                    >
-                        Delete
-                    </Trash2>
-                }
-
-                <textarea className={styles['comment-text']}
-                    id="comment"
-                    name="comment"
-                    defaultValue={data?.comment || ''}
-                    placeholder="Write your review here"
+                <X className={styles['close-btn'] + ' clickable'}
+                    onClick={handleClose}
                 />
+            </div>
 
-                <label className={styles["privacy-checkbox-label"]} 
-                    htmlFor="isPrivate"
+            { user ? 
+                <form className={styles["review-form"]}
+                    onSubmit={handleSubmit}
                 >
-                    <input className={styles["privacy-checkbox"]}
-                        type="checkbox"
-                        id="isPrivate"
-                        name="isPrivate"
-                        defaultChecked={data?.isPrivate || false}
-                    />
-                    Private
-                </label>
-
-                <div className={styles['rating-input']}>
-                    <div className={styles['star-container']}>
-                        {[1, 2, 3, 4, 5].map((value) => (
-                        <div className={styles['star-wrapper']}
-                            key={value}
-                            onMouseEnter={() => setHoverRating(value)}
-                            onMouseLeave={() => setHoverRating(0)}
-                            onClick={() => setRating(value)}
+                    { data.id && 
+                        <Trash2 className={styles['delete-btn']}
+                            onClick={handleDelete}
                         >
-                            <Star className={styles['star-empty']} />
+                            Delete
+                        </Trash2>
+                    }
 
-                            {value <= displayRating && (
-                                <Star className={
-                                    hoverRating ? styles['star-hover'] : styles['star-full']
-                                }/>
-                            )}
+                    <textarea className={styles['comment-text']}
+                        id="comment"
+                        name="comment"
+                        defaultValue={data?.comment || ''}
+                        placeholder="Write your review here"
+                    />
+
+                    <label className={styles["privacy-checkbox-label"]} 
+                        htmlFor="isPrivate"
+                    >
+                        <input className={styles["privacy-checkbox"]}
+                            type="checkbox"
+                            id="isPrivate"
+                            name="isPrivate"
+                            defaultChecked={data?.isPrivate || false}
+                        />
+                        Private
+                    </label>
+
+                    <div className={styles['rating-input']}>
+                        <div className={styles['star-container']}>
+                            {[1, 2, 3, 4, 5].map((value) => (
+                            <div className={styles['star-wrapper']}
+                                key={value}
+                                onMouseEnter={() => setHoverRating(value)}
+                                onMouseLeave={() => setHoverRating(0)}
+                                onClick={() => setRating(value)}
+                            >
+                                <Star className={styles['star-empty']} />
+
+                                {value <= displayRating && (
+                                    <Star className={
+                                        hoverRating ? styles['star-hover'] : styles['star-full']
+                                    }/>
+                                )}
+                            </div>
+                            ))}
                         </div>
-                        ))}
                     </div>
-                </div>
 
-                <div className={styles["modal-buttons"]}>
-                    <button className={styles['cancel-btn']}
-                        type="button" onClick={handleClose}>
-                        Cancel
-                    </button>
+                    <div className={styles["modal-buttons"]}>
+                        <button className={styles['cancel-btn']}
+                            type="button" onClick={handleClose}>
+                            Cancel
+                        </button>
 
-                    <button className={styles['save-btn']} type="submit">
-                        Save
-                    </button>
-                </div>
-            </form>
+                        <button className={styles['save-btn']} type="submit">
+                            Save
+                        </button>
+                    </div>
+                </form> 
+                : <h2 className={styles['warning-msg']}>
+                    You must be logged in to leave a review
+                </h2>
+            }     
         </dialog>
         
         <div className={styles['modal-container']}
