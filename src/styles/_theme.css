@@ -40,6 +40,10 @@
     --danger: var(--red);
     --danger-tint: color-mix(in srgb, var(--danger) 63%, white);
     --danger-shade: color-mix(in srgb, var(--danger) 63%, black);
+
+    --warn: var(--yellow);
+    --warn-tint: color-mix(in srgb, var(--warn) 63%, white);
+    --warn-shade: color-mix(in srgb, var(--warn) 63%, black);
 }
 
 /* size */
