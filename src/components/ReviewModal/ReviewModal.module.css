@@ -35,12 +35,10 @@
     color: var(--light);
 }
 
-
 .comment-text {
     width: 100%;
     height: 100%;
 }
-
 
 /* inputs */
 .modal-inputs {
@@ -134,4 +132,14 @@ button {
         background-color: var(--primary-shade);
         border: 1px solid var(--primary-shade);
     }
+}
+
+.warning-msg {
+    color: var(--warn);
+    font-style: italic;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
 }
