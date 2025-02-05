@@ -39,10 +39,16 @@ export default function Navbar() {
                 <div className={styles['navbar-user-options']}>
                     <div className={styles['user-dropdown']}>
                     { user ? 
-                        <div className={styles['navbar-user']}>
-                            <h3>{user.displayName}</h3>
-                            <User className={styles['user-icon'] + ' clickable'} /> 
-                            <button onClick={handleLogout}>Logout</button>
+                        <div className={styles['dropdown-container']}>
+                            <div className={styles['navbar-user']}>
+                                <h3>{user.displayName}</h3>
+                                <User className={styles['user-icon'] + ' clickable'} /> 
+                            </div>
+                            
+                            <ul className={styles['dropdown-menu']}>
+                                <li>Profile</li>
+                                <li onClick={handleLogout}>Logout</li>
+                            </ul>
                         </div>
                         : <button className={styles['login-btn']}
                             onClick={() => setModalOpen(true)}
@@ -52,8 +58,6 @@ export default function Navbar() {
                     }
                     </div>
                 </div>
-
-                
             </div>
         </nav>
     );
