@@ -1,9 +1,9 @@
 import styles from './Explore.module.css';
 import ArtistProfile from '../ArtistProfile/ArtistProfile';
 import Search from '../Search/Search';
-import api from '../../api/_api';
+import api from '../../util/api/_api';
 import { useState } from 'react';
-import { formatDuration } from '../../util';
+import { formatDuration } from '../../util/_util';
 
 
 export default function Explore() {

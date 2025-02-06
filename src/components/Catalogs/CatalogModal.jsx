@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import IconButton from '../Icon/IconButton';
-import api from '../../api/_api';
+import api from '../../util/api/_api';
 import styles from './Catalogs.module.css';
 
 

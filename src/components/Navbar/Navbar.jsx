@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
-import api from '../../api/_api';
+import api from '../../util/api/_api';
 import { useContext, useState } from 'react';
-import { UserContext } from '../../UserContext';
+import { UserContext } from '../../util/context/UserContext';
 import { User } from 'react-feather';
 import LoginModal from './LoginModal';
 

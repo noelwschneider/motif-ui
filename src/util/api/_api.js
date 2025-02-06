@@ -1,9 +1,10 @@
 import axios from 'axios';
-import { getCookie } from '../util';
+import { getCookie } from '../_util';
 import addAuth from './auth';
 import addCatalogs from './catalogs';
 import addReviews from './reviews';
 import addSpotify from './spotify';
+import addUser from './user';
 
 
 // api instance
@@ -23,6 +24,7 @@ addAuth(api);
 addCatalogs(api);
 addReviews(api);
 addSpotify(api);
+addUser(api);
 
 
 // interceptors

@@ -4,10 +4,9 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Navbar from './components/Navbar/Navbar';
 import SpotifyLoginCallback from './components/SpotifyLoginCallback';
-import ArtistProfile from './components/ArtistProfile/ArtistProfile';
 import { useEffect, useState } from 'react';
-import api from './api/_api';
-import { UserContext } from './UserContext';
+import api from './util/api/_api';
+import { UserContext } from './util/context/UserContext';
 
 
 export default function App() {
