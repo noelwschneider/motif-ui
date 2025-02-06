@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { UserContext } from '../../util/context/UserContext';
+import { UserContext } from '../../util/_util';
 import { X } from 'react-feather';
 import styles from './Navbar.module.css';
 import api from '../../util/api/_api';

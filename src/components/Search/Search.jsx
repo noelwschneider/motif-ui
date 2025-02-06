@@ -1,6 +1,6 @@
 import styles from './Search.module.css';
 import { useEffect, useState } from 'react';
-import api from '../../util.api/_api';
+import api from '../../util/api/_api';
 import { useLocation } from 'react-router-dom';
 
 
