@@ -46,7 +46,9 @@ export default function Navbar() {
                             </div>
                             
                             <ul className={styles['dropdown-menu']}>
-                                <li>Profile</li>
+                                <li>
+                                    <Link to={`/user/${user?.userId}`}>Profile</Link>
+                                </li>
                                 <li onClick={handleLogout}>Logout</li>
                             </ul>
                         </div>

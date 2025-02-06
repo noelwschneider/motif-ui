@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -17,6 +17,7 @@ export default function App() {
     const verifyUser = async () => {
       try {
         const userResponse = await api.auth.verify();
+        // todo: convert userResponse.data.userId to number instead of string
         setUser(userResponse?.data);
       } catch (err) {
         console.error(err);
@@ -36,13 +37,16 @@ export default function App() {
             <Route path="/login" element={user ? <Home /> : <Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/spotify-login-callback" element={<SpotifyLoginCallback />} />
-            <Route path="/artist-profile" element={<ArtistProfile />} />
             
+            <Route path="user/:userId"
+              element={<UserProfile />}
+            />
+
             <Route
               path="/home"
               element={<Home />}
             />
-            <Route path="/" element={<Navigate to="/home" />} />
+            <Route path="/" element={<Home />} />
           </Routes>
         </div>
       </Router>
