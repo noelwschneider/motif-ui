@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import api from '../util/api/_api';
+import api from 'api';
 
 
 export default function SpotifyLoginCallback() {

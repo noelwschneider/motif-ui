@@ -1,4 +1,4 @@
-import api from '../util/api/_api';
+import api from 'api';
 
 
 export default function SpotifyLogin() {

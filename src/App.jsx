@@ -5,8 +5,8 @@ import Register from './components/Register';
 import Navbar from './components/Navbar/Navbar';
 import SpotifyLoginCallback from './components/SpotifyLoginCallback';
 import { useEffect, useState } from 'react';
-import api from './util/api/_api';
-import { UserContext } from './util/_util';
+import api from 'api';
+import { UserContext } from 'utils';
 import UserProfile from './components/UserProfile/UserProfile';
 
 

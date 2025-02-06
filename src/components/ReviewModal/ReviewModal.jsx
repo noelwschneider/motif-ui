@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { UserContext } from '../../util/_util';
+import { UserContext } from 'utils';
 import styles from './ReviewModal.module.css';
-import api from '../../util/api/_api';
+import api from 'api';
 import { Star, Trash2, X } from 'react-feather';
 
 

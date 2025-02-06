@@ -1,7 +1,7 @@
 import styles from './UserProfile.module.css';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import api from '../../util/api/_api';
+import api from 'api';
 
 
 export default function UserProfile() {

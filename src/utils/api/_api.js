@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getCookie } from '../_util';
+import { getCookie } from 'utils';
 import addAuth from './auth';
 import addCatalogs from './catalogs';
 import addReviews from './reviews';

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../util/api/_api.js';
+import api from 'api';
 
 
 export default function ProtectedRoute({ children }) {
