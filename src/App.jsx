@@ -7,6 +7,7 @@ import SpotifyLoginCallback from './components/SpotifyLoginCallback';
 import { useEffect, useState } from 'react';
 import api from './util/api/_api';
 import { UserContext } from './util/context/UserContext';
+import UserProfile from './components/UserProfile/UserProfile';
 
 
 export default function App() {
