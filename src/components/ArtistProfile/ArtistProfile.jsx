@@ -6,7 +6,9 @@ import AlbumList from './AlbumList';
 import { Star } from 'react-feather';
 
 
+// bug: singles & compilations functionality is broken
 // todo: support multiple artists by allowing user to toggle between them. Load both discographies / reviews / etc.
+// ? lump 'albums' and 'compilations' together? (seems like a lot of compilations get categorized as albums anyways)
 // stretch: add album sort buttons, object for sorting functions
 // stretch: add alternate track view
 // stretch: open in spotify

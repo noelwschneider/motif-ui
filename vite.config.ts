@@ -9,6 +9,7 @@ export default defineConfig({
       api: '/src/utils/api/_api',
       app: '/src/app',
       components: '/src/components',
+      types: '/src/utils/_types',
       utils: '/src/utils/_utils',
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx'],

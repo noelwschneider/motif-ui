@@ -2,23 +2,24 @@ import styles from './Search.module.css';
 import { useEffect, useState } from 'react';
 import api from 'api';
 import { useLocation } from 'react-router-dom';
+import { SearchProps, SearchResults } from 'types';
 
 
 // todo: get album popularity score into the return
 // todo: pagination
-export default function Search({ handleSearchClick, searchOpen, setSearchOpen }) {
+export default function Search({ handleSearchClick, searchOpen, setSearchOpen }: SearchProps) {
     const location = useLocation();
     const querySearchParam = new URLSearchParams(location.search).get('q');
 
-    const [query, setQuery] = useState(querySearchParam || '');
-    const [searchResults, setSearchResults] = useState({
+    const [query, setQuery] = useState<string>(querySearchParam || '');
+    const [searchResults, setSearchResults] = useState<SearchResults>({
         metadata: {},
         artists: [],
         albums: [],
         tracks: [],
     });
-    const [contentType, setContentType] = useState('artists');
-    const [loading, setLoading] = useState(false);
+    const [contentType, setContentType] = useState<'artists' | 'albums' | 'tracks'>('artists');
+    const [loading, setLoading] = useState<boolean>(false);
     
     const handleSearch = async () => {
         if (!query.trim()) {
@@ -30,7 +31,7 @@ export default function Search({ handleSearchClick, searchOpen, setSearchOpen })
                 tracks: [],
             });
             return;
-        };
+        }
 
         setLoading(true);
         try {
@@ -40,7 +41,7 @@ export default function Search({ handleSearchClick, searchOpen, setSearchOpen })
                 limit: 10, 
                 offset: 0 
             });
-            setSearchResults({ ...response?.data });
+            setSearchResults(response?.data ?? { metadata: {}, artists: [], albums: [], tracks: [] });
         } catch (err) {
             console.error(err);
         } finally {
@@ -73,7 +74,7 @@ export default function Search({ handleSearchClick, searchOpen, setSearchOpen })
                 />
 
                 <fieldset className={styles['content-type-radio-group']}>
-                    { ['artists', 'albums', 'tracks'].map((type, ix) => (
+                    { (['artists', 'albums', 'tracks'] as const).map((type, ix) => (
                         <div key={`content-radio-${type}-${ix}`}>
                             <input id={`content-choice-${type}`}
                                 className={styles['content-type-radio-btn']}
@@ -81,7 +82,7 @@ export default function Search({ handleSearchClick, searchOpen, setSearchOpen })
                                 name="contentType"
                                 value={type}
                                 checked={contentType === type}
-                                onChange={(e) => setContentType(e.target.value)}
+                                onChange={(e) => setContentType(e.target.value as 'artists' | 'albums' | 'tracks')}
                             />
 
                             <label htmlFor={`content-choice-${type}`}>
@@ -96,26 +97,26 @@ export default function Search({ handleSearchClick, searchOpen, setSearchOpen })
                 }
         
                 { loading ? 
-                    Array.from({length: 10}, () => (
-                        <div className={styles['skeleton-item']}>
+                    Array.from({length: 10}, (_, index) => (
+                        <div key={`skeleton-${index}`} className={styles['skeleton-item']}>
                             <div className={styles['skeleton-img']}></div>
                             <div className={styles['skeleton-text']}></div>
                         </div>
-                        ))
+                    ))
                     
                     : searchResults[contentType].map((item) => (
                             <div className={styles['search-item']}
                                 key={`search-result-item-${item.spotifyId}`}
                             >
                                 <img className={styles['search-item-image'] + ' clickable'}
-                                    src={item?.images[2]?.url}
+                                    src={item?.images[2]?.url ?? ''}
                                     alt={`Image for ${item?.title}`}
-                                    onClick={() => handleSearchClick(contentType === 'artists' ? item.spotifyId : item.artists[0].spotifyId, item.spotifyId) }
+                                    onClick={() => handleSearchClick(contentType === 'artists' ? item.spotifyId : item.artists[0]?.spotifyId, item.spotifyId) }
                                 />
 
                                 <div className={styles['search-item-text']}>
                                     <h2 className={styles['search-item-title'] + ' clickable'}
-                                        onClick={() => handleSearchClick(contentType === 'artists' ? item.spotifyId : item.artists[0].spotifyId, item.spotifyId)}
+                                        onClick={() => handleSearchClick(contentType === 'artists' ? item.spotifyId : item.artists[0]?.spotifyId, item.spotifyId)}
                                     >
                                         {item.title}
                                     </h2>
@@ -132,7 +133,7 @@ export default function Search({ handleSearchClick, searchOpen, setSearchOpen })
                                                     key={`artist-title-${artist.spotifyId}-${ix}`}
                                                 >
                                                     {artist.title}
-                                                    {ix+1 !== item.artists.length && 
+                                                    {ix + 1 !== item.artists.length && 
                                                         <span className={styles['search-item-plaintext']}>, </span>
                                                     }   
                                                 </span>
