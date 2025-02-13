@@ -6,10 +6,16 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      api: '/src/utils/api/_api',
+      api: '/src/api/_api',
       app: '/src/app',
       components: '/src/components',
-      types: '/src/utils/_types',
+      endpoints: '/src/api',
+      hookLogic: '/src/hooks',
+      hooks: '/src/hooks/_hooks',
+      layout: '/src/layout',
+      provider: '/src/provider',
+      types: '/src/utils/types',
+      ui: '/src/ui',
       utils: '/src/utils/_utils',
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx'],

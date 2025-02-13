@@ -1,3 +1,14 @@
+/* proportions */
+:root {
+    --BASE-SIZE: 18px;
+
+    /* ratios for adjusting values */
+    --upsize: 1.6;
+    --downsize: 0.6;
+    --upsize-pct: 62%;
+    --downsize-pct: 38%;
+}
+
 /* color */
 :root {
     --red: #B30024;
@@ -26,38 +37,40 @@
     --light: var(--gray-d);
 
     --gray: var(--gray-8);
-    --gray-tint: color-mix(in srgb, var(--gray) 63%, white);
-    --gray-shade: color-mix(in srgb, var(--gray) 63%, black);
+    --gray-tint: color-mix(in srgb, var(--gray) 62%, white);
+    --gray-shade: color-mix(in srgb, var(--gray) 62%, black);
+    /* --gray-tint: color-mix(in srgb, var(--gray) var(--upsize-pct), white); */
+    /* --gray-shade: color-mix(in srgb, var(--gray) var(--upsize-pct), black); */
 
     --primary: var(--blue);
-    --primary-tint: color-mix(in srgb, var(--primary) 63%, white);
-    --primary-shade: color-mix(in srgb, var(--primary) 63%, black);
+    --primary-tint: color-mix(in srgb, var(--primary) 62%, white);
+    --primary-shade: color-mix(in srgb, var(--primary) 62%, black);
 
     --secondary: var(--light);
     --line: white;
     --fill: var(--dark);
 
     --danger: var(--red);
-    --danger-tint: color-mix(in srgb, var(--danger) 63%, white);
-    --danger-shade: color-mix(in srgb, var(--danger) 63%, black);
+    --danger-tint: color-mix(in srgb, var(--danger) 62%, white);
+    --danger-shade: color-mix(in srgb, var(--danger) 62%, black);
 
     --warn: var(--yellow);
-    --warn-tint: color-mix(in srgb, var(--warn) 63%, white);
-    --warn-shade: color-mix(in srgb, var(--warn) 63%, black);
+    --warn-tint: color-mix(in srgb, var(--warn) 62%, white);
+    --warn-shade: color-mix(in srgb, var(--warn) 62%, black);
 }
 
 /* size */
 :root {
-    --BASE-SIZE: 18px;
+    --line-height: 1.6;
     
     --xxs: 0.2rem;
-    --xs: 0.35rem;
+    --xs: 0.4rem;
     --s: 0.6rem;
     --m: 1rem;
     --l: 1.6rem;
     --xl: 2.5rem;
     --xxl: 4rem;
-    --line-height: 1.6;
+    
 }
 
 /* fontface */

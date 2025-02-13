@@ -2,10 +2,17 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "api": ["utils/api/_api"],
-      "app/*": ["app/*"],
-      "components/*": ["components/*"],
-      "types": ["utils/_types"],
+      "api": ["api/_api"],
+      "app": ["app/*"],
+      "assets": ["assets/*"],
+      "components": ["components/*"],
+      "endpoints": ["api/*"],
+      "hookLogic": ["hooks/*"],
+      "hooks": ["hooks/_hooks"],
+      "layout": ["layout/*"],
+      "provider": ["provider/*"],
+      "types": ["utils/types"],
+      "ui": ["ui/*"],
       "utils": ["utils/_utils"]
     },
 
@@ -37,5 +44,5 @@
     "checkJs": false,
     "noEmitOnError": false, // allow build w/ TS errors
   },
-  "include": ["src"]
+  "include": ["src", "_old/api", "_old/ProtectedRoute.jsx"]
 }
