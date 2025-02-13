@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from 'api';
-import { UserContext } from 'utils';
+import { UserContext } from 'utils/utils';
 
 
 export default function Login() {

@@ -2,7 +2,7 @@ import styles from './Search.module.css';
 import { useEffect, useState } from 'react';
 import api from 'api';
 import { useLocation } from 'react-router-dom';
-import { SearchProps, SearchResults } from 'types';
+import { SearchProps, SearchResults } from 'utils/types';
 
 
 // todo: get album popularity score into the return

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { AxiosResponse, AxiosError, InternalAxiosRequestConfig } from 'axios';
-import { getCookie } from 'utils';
-import { MotifApiInstance } from 'types';
+import { getCookie } from 'utils/utils';
+import { MotifApiInstance } from 'utils/types';
 import addAuth from './auth';
 import addCatalogs from './catalogs';
 import addReviews from './reviews';

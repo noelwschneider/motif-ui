@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import api from 'api';
 import { useContext, useState } from 'react';
-import { UserContext } from 'utils';
+import { UserContext } from 'utils/utils';
 import { User } from 'react-feather';
 import LoginModal from './LoginModal';
 

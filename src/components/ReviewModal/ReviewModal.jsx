@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { UserContext } from 'utils';
+import { UserContext } from 'utils/utils';
 import styles from './ReviewModal.module.css';
 import api from 'api';
 import { Star, Trash2, X } from 'react-feather';

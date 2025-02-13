@@ -3,8 +3,8 @@ import ArtistProfile from '../ArtistProfile/ArtistProfile';
 import Search from '../Search/Search';
 import api from 'api';
 import { useState } from 'react';
-import { formatDuration } from 'utils';
-import { Artist, HandleSearchClick, SelectedItemData } from 'types';
+import { formatDuration } from 'utils/utils';
+import { Artist, HandleSearchClick, SelectedItemData } from 'utils/types';
 
 
 export default function Explore() {
