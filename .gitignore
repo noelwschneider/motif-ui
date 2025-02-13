@@ -28,3 +28,6 @@ dist-ssr
 
 # local
 _dev/
+_old/
+_todo.md
+_todo.txt
