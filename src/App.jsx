@@ -6,7 +6,7 @@ import Navbar from './components/Navbar/Navbar';
 import SpotifyLoginCallback from './components/SpotifyLoginCallback';
 import { useEffect, useState } from 'react';
 import api from 'api';
-import { UserContext } from 'utils';
+import { UserContext } from 'utils/utils';
 import UserProfile from './components/UserProfile/UserProfile';
 
 

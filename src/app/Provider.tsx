@@ -1,19 +1,18 @@
-import { createContext } from "react";
-const useUser = 'todo';
-const useSearch = 'todo';
+import { AppContext } from "utils/contexts";
+import { useSearch, useUser } from "utils/hooks";
+import api from "api";
 
 
-const AppContext = createContext(null);
-
-
-export default function AppProvider() {
-    const user = useUser;
-    const search = useSearch;
+export default function AppProvider({ children }) {
+    const user = useUser();
+    const search = useSearch(api.spotify.search);
 
     return (
-        <AppContext.Provider 
-            search={search}    
-            user={user}
-        />
+        <AppContext.Provider value={{
+            search,
+            user
+        }}>
+            { children }
+        </AppContext.Provider>
     )
-}
+};

@@ -1,4 +1,4 @@
-import { MotifApiInstance, UserResponse } from "types";
+import { MotifApiInstance, UserResponse } from "utils/types";
 
 
 export default function addUser(api: MotifApiInstance): void {

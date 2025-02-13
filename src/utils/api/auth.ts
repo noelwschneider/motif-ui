@@ -1,4 +1,4 @@
-import { AuthLoginArgs, AuthRegisterArgs, MotifApiInstance, UserResponse } from 'types';
+import { AuthLoginArgs, AuthRegisterArgs, MotifApiInstance, UserResponse } from 'utils/types';
 
 export default function addAuth(api: MotifApiInstance): void {
     const urlPrefix = '/auth';
