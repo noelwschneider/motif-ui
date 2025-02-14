@@ -1,12 +1,21 @@
 import axios from 'axios';
-import { AxiosResponse, AxiosError, InternalAxiosRequestConfig } from 'axios';
+import { AxiosInstance, AxiosResponse, AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { getCookie } from 'utils/utils';
-import { MotifApiInstance } from 'utils/types';
-import addAuth from './auth';
-import addCatalogs from './catalogs';
-import addReviews from './reviews';
-import addSpotify from './spotify';
-import addUser from './user';
+
+import addAuth, { AuthApi } from 'utils/api/auth';
+import addCatalogs, { CatalogsApi } from 'utils/api/catalogs';
+import addReviews, { ReviewsApi } from 'utils/api/reviews';
+import addSpotify, { SpotifyApi } from 'utils/api/spotify';
+import addUser, { UserApi } from 'utils/api/user';
+
+
+export interface MotifApiInstance extends AxiosInstance {
+  auth?: AuthApi;
+  catalogs?: CatalogsApi;
+  reviews?: ReviewsApi;
+  spotify?: SpotifyApi;
+  user?: UserApi;
+};
 
 
 const api: MotifApiInstance = axios.create({

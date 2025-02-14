@@ -1,4 +1,26 @@
-import { AuthLoginArgs, AuthRegisterArgs, MotifApiInstance, UserResponse } from 'utils/types';
+import { MotifApiInstance } from "app/api";
+import { UserResponse } from "./user";
+
+
+// ? can this be set programmatically to match auth.api?
+export interface AuthApi {
+    login: (args: AuthLoginArgs) => Promise<UserResponse | null>;
+    register: (args: AuthRegisterArgs) => Promise<string | null>;
+    logout: () => Promise<string | null>;
+    verify: () => Promise<UserResponse | null>;
+};
+
+export interface AuthLoginArgs {
+    email: string;
+    password: string;
+};
+
+export interface AuthRegisterArgs {
+    email: string;
+    password: string;
+    username: string;
+};
+
 
 export default function addAuth(api: MotifApiInstance): void {
     const urlPrefix = '/auth';

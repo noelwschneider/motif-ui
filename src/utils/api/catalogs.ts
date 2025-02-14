@@ -1,13 +1,43 @@
-export default function addCatalogs(api) {
+import { MotifApiInstance } from "app/api";
+import { AxiosResponse } from "axios";
+
+export interface Catalog {
+    comment: string;
+    imageUrl: string;
+    isPrivate: boolean;
+    name: string;
+};
+
+export interface CatalogItem {
+    comment: string;
+    position: number;
+    spotifyArtistId: string;
+    spotifyId: string;
+};
+
+export interface CatalogsApi {
+    addItem: (catalogId: number, item: CatalogItem) => Promise<AxiosResponse>;
+    createCatalog: (catalog: Catalog) => Promise<AxiosResponse>;
+    deleteCatalog: (catalogId: number) => Promise<AxiosResponse>;
+    deleteItem: (itemId: number) => Promise<AxiosResponse>;
+    getCatalogById: (catalogId: number) => Promise<AxiosResponse>;
+    getCurrentUserCatalogs: () => Promise<AxiosResponse>;
+    getUserPublicCatalogs: (userId: number) => Promise<AxiosResponse>;
+    updateCatalog: (catalogId: number, catalog: Catalog) => Promise<AxiosResponse>;
+    updateCatalogItem: (itemId: number, item: CatalogItem) => Promise<AxiosResponse>;
+};
+
+
+export default function addCatalogs(api: MotifApiInstance) {
     const urlPrefix = '/catalogs';
     
     api.catalogs = {
-        addItem: async (catalogId, { 
+        addItem: async (catalogId: number, { 
             spotifyId,
             spotifyArtistId,
             comment,
             position,
-        }) => {
+        }: CatalogItem) => {
             return api.post(`${urlPrefix}/${catalogId}`, {
                 spotifyId,
                 spotifyArtistId,
