@@ -1,8 +1,8 @@
-import { useContext, useEffect, useRef, useState } from 'react';
-import { UserContext } from 'utils/utils';
+import { useEffect, useRef, useState } from 'react';
 import styles from './ReviewModal.module.css';
-import api from 'api';
+import api from 'app/api';
 import { Star, Trash2, X } from 'react-feather';
+import { useCurrentUser } from 'hooks';
 
 
 // todo: close if no spotifyId in data prop
@@ -17,7 +17,7 @@ export default function ReviewModal({
 
     const displayRating = hoverRating || rating;
     const dialogRef = useRef(null);
-    const { user } = useContext(UserContext);
+    const { user } = useCurrentUser();
 
     useEffect(() => {
         // prevent scrolling when open

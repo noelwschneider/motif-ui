@@ -1,14 +1,14 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import api from 'api';
-import { UserContext } from 'utils/utils';
+import api from 'app/api';
+import { useCurrentUser } from 'hooks';
 
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser } = useCurrentUser();
   const location = useLocation();
   const navigate = useNavigate();
 

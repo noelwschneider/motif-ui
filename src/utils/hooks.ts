@@ -1,5 +1,16 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
+import api from "app/api";
+import { AppContext } from "contexts";
 
+export function useCurrentUser() {
+    const { user } = useContext(AppContext);
+    return user;
+};
+
+export function useGlobalSearchbar() {
+    const { search } = useContext(AppContext);
+    return search;
+};
 
 export function useSearch(fn, config={
     debounceMs: 500,
@@ -68,6 +79,20 @@ export function useSearch(fn, config={
 export function useUser() {
     const [user, setUser] = useState();
 
+    useEffect(() => {
+        const verifyUser = async () => {
+          try {
+            const userResponse = await api.auth.verify();
+            // todo: convert userResponse.data.userId to number instead of string
+            setUser(userResponse?.data);
+          } catch (err) {
+            console.error(err);
+            setUser(null);
+          }
+        };
+
+        verifyUser();
+    }, []);
     return {
         setUser,
         user,

@@ -3,7 +3,6 @@ import Home from '../components/Home';
 import Login from '../components/Login';
 import Register from '../components/Register';
 import Navbar from '../components/Navbar/Navbar';
-import SpotifyLoginCallback from '../components/SpotifyLoginCallback';
 import UserProfile from '../components/UserProfile/UserProfile';
 
 
@@ -13,11 +12,9 @@ export default function AppRouter() {
         <Router>
             <Navbar />
 
-            <div id="content-wrapper">
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/spotify-login-callback" element={<SpotifyLoginCallback />} />
                 
                 <Route path="user/:userId"
                 element={<UserProfile />}
@@ -29,7 +26,6 @@ export default function AppRouter() {
                 />
                 <Route path="/" element={<Home />} />
             </Routes>
-            </div>
         </Router>
-    )
+    );
 };
