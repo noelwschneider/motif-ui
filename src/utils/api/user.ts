@@ -1,4 +1,16 @@
-import { MotifApiInstance, UserResponse } from "utils/types";
+import { MotifApiInstance } from "app/api";
+
+export interface UserResponse {
+    id: number;
+    username: string;
+    displayName: string;
+    profilePicUrl: string;
+    createDate: string;
+};
+
+export interface UserApi {
+    fetchUser: (userId: string) => Promise<UserResponse | null>;
+};
 
 
 export default function addUser(api: MotifApiInstance): void {
