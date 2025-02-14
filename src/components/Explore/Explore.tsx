@@ -1,7 +1,7 @@
 import styles from './Explore.module.css';
 import ArtistProfile from '../ArtistProfile/ArtistProfile';
 import Search from '../Search/Search';
-import api from 'api';
+import api from 'app/api';
 import { useState } from 'react';
 import { formatDuration } from 'utils/utils';
 

@@ -1,8 +1,8 @@
-import { useContext, useEffect, useRef, useState } from 'react';
-import { UserContext } from 'utils/utils';
+import { useEffect, useRef, useState } from 'react';
 import { X } from 'react-feather';
 import styles from './Navbar.module.css';
-import api from 'api';
+import api from 'app/api';
+import { useCurrentUser } from 'hooks';
 
 
 export default function LoginModal({
@@ -13,7 +13,7 @@ export default function LoginModal({
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dialogRef = useRef(null);
-    const { setUser } = useContext(UserContext);
+    const { setUser } = useCurrentUser();
 
     useEffect(() => {
         // prevent scrolling when open

@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
-import api from 'api';
-import { useContext, useState } from 'react';
-import { UserContext } from 'utils/utils';
+import api from 'app/api';
+import { useState } from 'react';
 import { User } from 'react-feather';
 import LoginModal from './LoginModal';
+import { useCurrentUser } from 'hooks';
 
 
 export default function Navbar() {
     const [modalOpen, setModalOpen] = useState(false);
-    const { user, setUser } = useContext(UserContext);
+    const { user, setUser } = useCurrentUser();
 
     const handleLogout = async () => {
         try {

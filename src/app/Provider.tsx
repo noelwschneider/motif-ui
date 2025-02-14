@@ -1,6 +1,6 @@
 import { AppContext } from "utils/contexts";
 import { useSearch, useUser } from "utils/hooks";
-import api from "api";
+import api from "app/api";
 
 
 export default function AppProvider({ children }) {
