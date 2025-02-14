@@ -2,17 +2,16 @@ import styles from './Search.module.css';
 import { useEffect, useState } from 'react';
 import api from 'api';
 import { useLocation } from 'react-router-dom';
-import { SearchProps, SearchResults } from 'utils/types';
 
 
 // todo: get album popularity score into the return
 // todo: pagination
-export default function Search({ handleSearchClick, searchOpen, setSearchOpen }: SearchProps) {
+export default function Search({ handleSearchClick, searchOpen, setSearchOpen }) {
     const location = useLocation();
     const querySearchParam = new URLSearchParams(location.search).get('q');
 
     const [query, setQuery] = useState<string>(querySearchParam || '');
-    const [searchResults, setSearchResults] = useState<SearchResults>({
+    const [searchResults, setSearchResults] = useState({
         metadata: {},
         artists: [],
         albums: [],
