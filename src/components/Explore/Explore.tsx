@@ -4,17 +4,16 @@ import Search from '../Search/Search';
 import api from 'api';
 import { useState } from 'react';
 import { formatDuration } from 'utils/utils';
-import { Artist, HandleSearchClick, SelectedItemData } from 'utils/types';
 
 
 export default function Explore() {
-    const [artistProfiles, setArtistProfiles] = useState<Record<string, Artist>>({});
-    const [itemData, setItemData] = useState<SelectedItemData | null>(null);
+    const [artistProfiles, setArtistProfiles] = useState({});
+    const [itemData, setItemData] = useState(null);
     const [albumIndex, setAlbumIndex] = useState<number | null>(null);
     const [searchOpen, setSearchOpen] = useState<boolean>(true);
 
     // todo: accept tracks w/ multiple artists
-    const handleClick: HandleSearchClick = async (selectedArtistId: string, selectedItemId?: string, ix?: number) => {
+    const handleClick = async (selectedArtistId: string, selectedItemId?: string, ix?: number) => {
         const itemId = selectedItemId || selectedArtistId;
         const artistProfile = await fetchArtistProfile(selectedArtistId);
 
@@ -33,7 +32,7 @@ export default function Explore() {
         setSearchOpen(false);
     };
 
-    const fetchReviews = async (artistId: string): Promise<any> => {
+    const fetchReviews = async (artistId: string) => {
         try {
             const reviews = await api.reviews.getArtist(artistId);
             return reviews?.data;
@@ -43,7 +42,7 @@ export default function Explore() {
         }
     };
 
-    const fetchArtistProfile = async (artistId: string): Promise<Artist | null> => {
+    const fetchArtistProfile = async (artistId: string) => {
         if (artistProfiles[artistId]) {
             return artistProfiles[artistId];
         }
@@ -79,8 +78,8 @@ export default function Explore() {
 function getSelectedItemData(
     itemId: string,
     albumIndex: number | null,
-    artistProfile: Artist
-): SelectedItemData | null {
+    artistProfile,
+) {
     if (!artistProfile) return null;
 
     if (itemId === artistProfile.spotifyId) {
@@ -138,7 +137,7 @@ function getSelectedItemData(
 };
 
 
-function getAlbumIndex(itemId: string, artistProfile: Artist): number | null {
+function getAlbumIndex(itemId: string, artistProfile): number | null {
     if (!artistProfile) return null;
     if (itemId === artistProfile.spotifyId) return null;
 
