@@ -23,17 +23,3 @@ export interface SearchProps {
     searchOpen: boolean;
     setSearchOpen: (open: boolean) => void;
 };
-
-export interface SearchResultItem {
-    spotifyId: string;
-    title: string;
-    images: { url: string }[];
-    artists: { spotifyId: string; title: string }[];
-};
-
-export interface SearchResults {
-    metadata: Record<string, any>;
-    artists: SearchResultItem[];
-    albums: SearchResultItem[];
-    tracks: SearchResultItem[];
-};

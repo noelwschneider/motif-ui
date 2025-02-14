@@ -9,15 +9,6 @@ import addSpotify, { SpotifyApi } from 'utils/api/spotify';
 import addUser, { UserApi } from 'utils/api/user';
 
 
-export interface MotifApiInstance extends AxiosInstance {
-  auth?: AuthApi;
-  catalogs?: CatalogsApi;
-  reviews?: ReviewsApi;
-  spotify?: SpotifyApi;
-  user?: UserApi;
-};
-
-
 const api: MotifApiInstance = axios.create({
   baseURL: 'http://127.0.0.1:5174/api', // todo: use env variables
   timeout: 10000,
@@ -28,12 +19,14 @@ const api: MotifApiInstance = axios.create({
   },
 });
 
+
 // modules
 addAuth(api);
 addCatalogs(api);
 addReviews(api);
 addSpotify(api);
 addUser(api);
+
 
 // interceptors
 api.interceptors.response.use(
@@ -74,4 +67,14 @@ api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   return config;
 });
 
+
 export default api;
+
+
+export interface MotifApiInstance extends AxiosInstance {
+  auth?: AuthApi;
+  catalogs?: CatalogsApi;
+  reviews?: ReviewsApi;
+  spotify?: SpotifyApi;
+  user?: UserApi;
+};
