@@ -1,5 +1,5 @@
-import { AppContext } from "utils/contexts";
-import { useSearch, useUser } from "utils/hooks";
+import { AppContext } from "contexts";
+import { useSearch, useUser } from "hooks";
 import api from "app/api";
 
 
