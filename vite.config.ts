@@ -8,9 +8,9 @@ export default defineConfig({
     alias: {
       app: '/src/app',
       components: '/src/components',
-      contexts: 'utils/contexts',
-      hooks: 'utils/hooks',
-      utils: '/src/utils/utils',
+      contexts: '/src/utils/contexts',
+      hooks: '/src/utils/hooks',
+      utils: '/src/utils',
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
