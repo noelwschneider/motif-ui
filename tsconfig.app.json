@@ -6,6 +6,7 @@
       "components/*": ["components/*"],
       "contexts": ["utils/contexts"],
       "hooks": ["utils/hooks"],
+      "pages": ["pages/*"],
       "utils/*": ["utils/*"]
     },
 
