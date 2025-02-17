@@ -10,6 +10,7 @@ export default defineConfig({
       components: '/src/components',
       contexts: '/src/utils/contexts',
       hooks: '/src/utils/hooks',
+      pages: '/src/pages',
       utils: '/src/utils',
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx'],

@@ -1,12 +1,12 @@
-import styles from './Explore.module.css';
-import ArtistProfile from '../ArtistProfile/ArtistProfile';
-import Search from '../Search/Search';
+import styles from './Home.module.css';
+import ArtistProfile from 'components/ArtistProfile/ArtistProfile';
+import Search from 'components/Search/Search';
 import api from 'app/api';
 import { useState } from 'react';
 import { formatDuration } from 'utils/utils';
 
 
-export default function Explore() {
+export default function Home() {
     const [artistProfiles, setArtistProfiles] = useState({});
     const [itemData, setItemData] = useState(null);
     const [albumIndex, setAlbumIndex] = useState<number | null>(null);
@@ -72,7 +72,7 @@ export default function Explore() {
             />
         </div>
     );
-}
+};
 
 // HELPERS
 function getSelectedItemData(
