@@ -11,7 +11,6 @@ export default function addSpotify(api: MotifApiInstance) {
             const response = await api.get(urlPrefix + '/artist-profile', {
                 params: { id }
             });
-
             return response?.data || response || null;
         },
 

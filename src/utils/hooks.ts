@@ -40,7 +40,7 @@ export function useSearch(fn, config={
             setLoading(true);
             try {
                 const response = await fn({ query, ...reqBody });
-                setSearchResults(response);
+                setSearchResults(response || EMPTY_SEARCH_RESULTS);
             } catch (err) {
                 console.error(err);
             } finally {
@@ -113,3 +113,7 @@ export function useUser() {
         user,
     };
 };
+
+export function useArtist() {
+
+}
