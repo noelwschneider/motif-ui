@@ -74,11 +74,8 @@ export default function addReviews(api: MotifApiInstance) {
         },
 
         getArtist: async (artistId: string): Promise<ArtistReviews[]> => {
-            console.log('fetching reviews');
             const response = await api.get(`${urlPrefix}/artist/${artistId}`);
-            console.log('reviews fetched');
             return response?.data || response || null;
-
         },
     } as ReviewsApi;
 };
