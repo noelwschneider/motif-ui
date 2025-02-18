@@ -69,9 +69,27 @@ export function useSearch(fn, config={
 };
 
 
-// todo: login/logout functions?
 export function useUser() {
     const [user, setUser] = useState();
+
+    const handleLogin = async (email, password) => {
+        try {
+            const loginResponse = await api.auth.login({ email, password });
+            setUser(loginResponse);
+        } catch (err) {
+          console.error(err);
+        };
+    };
+
+    const handleLogout = async () => {
+        try {
+            await api.auth.logout();
+        } catch (err) {
+            console.error('Logout failed', err);
+        } finally {
+            setUser(null);
+        };
+    };
 
     useEffect(() => {
         const verifyUser = async () => {
@@ -87,7 +105,10 @@ export function useUser() {
 
         verifyUser();
     }, []);
+
     return {
+        handleLogin,
+        handleLogout,
         setUser,
         user,
     };
