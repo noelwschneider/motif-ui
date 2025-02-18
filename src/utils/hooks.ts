@@ -7,7 +7,7 @@ export function useCurrentUser() {
     return user;
 };
 
-export function useGlobalSearchbar() {
+export function useGlobalSearch() {
     const { search } = useContext(AppContext);
     return search;
 };

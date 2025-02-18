@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { X } from 'react-feather';
-import styles from './Navbar.module.css';
+import styles from './LoginModal.module.css';
 import api from 'app/api';
 import { useCurrentUser } from 'hooks';
 
