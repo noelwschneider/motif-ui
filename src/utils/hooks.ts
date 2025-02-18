@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import api from "app/api";
 import { AppContext } from "contexts";
 
@@ -12,57 +12,51 @@ export function useGlobalSearch() {
     return search;
 };
 
+const DEBOUNCE_MS = 500;
+const EMPTY_SEARCH_RESULTS = {
+    albums: [],
+    artists: [],
+    tracks: [],
+};
+
 export function useSearch(fn, config={
-    debounceMs: 500,
-    defaultResults: {},
     loading: false,
     query: '',
     reqBody: {},
 }) {
     const [query, setQuery] = useState<string>(config.query);
     const [reqBody, setReqBody] = useState(config.reqBody);
-    const [searchResults, setSearchResults] = useState(config.defaultResults);
+    const [searchResults, setSearchResults] = useState(EMPTY_SEARCH_RESULTS);
     const [loading, setLoading] = useState<boolean>(config.loading);
-    
-    const clearSearch = useCallback(() => {
+
+    const clearSearch = () => {
         setQuery('');
         setLoading(false);
-        setSearchResults({});
-    }, []);
-
-    const handleSearch = useCallback(async () => {
-        if (!query?.trim()) {
-            clearSearch();
-            return;
-        };
-
-        setLoading(true);
-
-        try {
-            const response = await fn({ query, ...reqBody });
-            return response;
-        } catch (err) {
-            console.error(err);
-        } finally {
-            setLoading(false);
-        };
-    }, [fn, query, reqBody, clearSearch]);
+        setSearchResults(EMPTY_SEARCH_RESULTS);
+    };
 
     useEffect(() => {
+        const handleSearch = async () => {
+            setLoading(true);
+            try {
+                const response = await fn({ query, ...reqBody });
+                setSearchResults(response);
+            } catch (err) {
+                console.error(err);
+            } finally {
+                setLoading(false);
+            };
+        };
+
         const handler = setTimeout(async () => {
-            const response = await handleSearch();
-            setSearchResults({ ...response ?? config.defaultResults});
-        }, config.debounceMs);
+            handleSearch();
+        }, DEBOUNCE_MS);
 
         return () => clearTimeout(handler);
-    }, [
-        config.debounceMs, 
-        config.defaultResults, 
-        handleSearch, 
-        query
-    ]);
+    }, [fn, reqBody, query]);
 
     return { 
+        clearSearch,
         loading,
         query,
         reqBody,
