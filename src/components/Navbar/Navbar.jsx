@@ -3,13 +3,14 @@ import styles from './Navbar.module.css';
 import api from 'app/api';
 import { useState } from 'react';
 import { User } from 'react-feather';
-import LoginModal from './LoginModal';
-import { useCurrentUser } from 'hooks';
+import LoginModal from 'components/LoginModal/LoginModal';
+import { useCurrentUser, useGlobalSearch } from 'hooks';
 
 
 export default function Navbar() {
     const [modalOpen, setModalOpen] = useState(false);
     const { user, setUser } = useCurrentUser();
+    const { query, setQuery } = useGlobalSearch();
 
     const handleLogout = async () => {
         try {
@@ -28,13 +29,12 @@ export default function Navbar() {
                     motif
                 </Link>
 
-                {/* placing here instead of end of component to simplify horizontal spacing */}
-                { modalOpen && 
-                    <LoginModal 
-                        isOpen={modalOpen}
-                        onClose={() => setModalOpen(false)}
-                    />
-                }
+                <input className={styles["searchbar-input"]}
+                    type="text"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search for music"
+                />
 
                 <div className={styles['navbar-user-options']}>
                     <div className={styles['user-dropdown']}>
@@ -61,6 +61,13 @@ export default function Navbar() {
                     </div>
                 </div>
             </div>
+
+            { modalOpen && 
+                <LoginModal 
+                    isOpen={modalOpen}
+                    onClose={() => setModalOpen(false)}
+                />
+            }
         </nav>
     );
 };

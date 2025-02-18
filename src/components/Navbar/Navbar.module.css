@@ -52,80 +52,9 @@
 }
 
 
-.modal-container {
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    z-index: 1;
-    background: rgba(0, 0, 0, 0.5);
-    position: fixed;
-    top: 0;
-    left: 0;
-}
-.login-modal {
-    border-radius: var(--s);
-    background-color: var(--primary-shade);
-    
-    height: 35%;
-    height: auto;
-    width: 33%;
-
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-
-    z-index: 2;
-    overflow: hidden;
-}
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-}
-.modal-title {
-    line-height: 1;
-    text-wrap: nowrap;
-    display: inline-block;
-    width: min-content;
-    color: var(--light);
-}
-.close-btn {
-    cursor: pointer;
-    stroke: var(--gray-shade);
-    &:hover { stroke: var(--gray-tint); }
-}
-.modal-inputs {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s);
-    margin: var(--s) 0;
-    width: 100%;
-}
-.modal-btns {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    gap: var(--xs);
-}
-.cancel-btn {
-    flex: 1 1 37%;
-    background-color: var(--light);
-    
-    &:hover {
-        background-color: var(--gray-tint);
-    }
-}
-.submit-btn {
-    flex: 1 1 63%;
-    color: var(--dark);
-    border: 1px solid var(--primary);
-    background-color: var(--primary);
-    
-    &:hover { 
-        background-color: var(--primary-tint);
-        border: 1px solid var(--primary-tint);
-    }
+.searchbar-input {
+    padding: var(--s);
+    margin-bottom: var(--s);
 }
 
 .navbar-user {
