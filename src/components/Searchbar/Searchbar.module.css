@@ -1,0 +1,7 @@
+.searchbar {}
+
+.searchbar-input {
+    padding: var(--s);
+    width: 100%;
+    margin-bottom: var(--s);
+}
