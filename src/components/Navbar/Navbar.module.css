@@ -52,7 +52,7 @@
 }
 
 
-.searchbar-input {
+.global-searchbar {
     padding: var(--s);
     margin-bottom: var(--s);
 }

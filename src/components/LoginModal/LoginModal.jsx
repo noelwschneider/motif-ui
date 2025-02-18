@@ -13,7 +13,7 @@ export default function LoginModal({
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dialogRef = useRef(null);
-    const { setUser } = useCurrentUser();
+    const { handleLogin } = useCurrentUser();
 
     useEffect(() => {
         // prevent scrolling when open
@@ -39,8 +39,7 @@ export default function LoginModal({
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const loginResponse = await api.auth.login({ email, password });
-          setUser(loginResponse);
+          handleLogin();
           handleClose();
         } catch (err) {
           console.error(err);
