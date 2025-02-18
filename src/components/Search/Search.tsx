@@ -5,11 +5,10 @@ import { useGlobalSearch } from 'hooks';
 
 // todo: get album popularity score into the return
 // todo: pagination
-export default function Search({ handleSearchClick }) {
+export default function GlobalSearchResults({ handleSearchClick }) {
     const [contentType, setContentType] = useState<'artists' | 'albums' | 'tracks'>('artists');
     const { searchResults } = useGlobalSearch();
 
-    console.log('searchResults;', searchResults);
     return (
         <div className={styles['search-container']}>
             <fieldset className={styles['content-type-radio-group']}>
@@ -38,12 +37,12 @@ export default function Search({ handleSearchClick }) {
                     <img className={styles['search-item-image'] + ' clickable'}
                         src={item?.images[2]?.url ?? ''}
                         alt={`Image for ${item?.title}`}
-                        onClick={() => handleSearchClick(contentType === 'artists' ? item.spotifyId : item?.artists[0]?.spotifyId, item.spotifyId) }
+                        onClick={() => contentType === 'artists' ? handleSearchClick(item?.spotifyId, item?.spotifyId) : handleSearchClick(item?.artists[0].spotifyId, item?.spotifyId)}
                     />
 
                     <div className={styles['search-item-text']}>
                         <h2 className={styles['search-item-title'] + ' clickable'}
-                            onClick={() => handleSearchClick(contentType === 'artists' ? item.spotifyId : item?.artists[0]?.spotifyId, item.spotifyId)}
+                            onClick={() => contentType === 'artists' ? handleSearchClick(item?.spotifyId, item?.spotifyId) : handleSearchClick(item?.artists[0].spotifyId, item?.spotifyId)}
                         >
                             {item.title}
                         </h2>
@@ -56,7 +55,7 @@ export default function Search({ handleSearchClick }) {
                                 
                                 {item.artists.map((artist, ix) => (
                                     <span className={styles['search-item-artist'] + ' clickable'}
-                                        onClick={() => handleSearchClick(artist.spotifyId)}
+                                        onClick={() => handleSearchClick(item?.artists[ix].spotifyId, item?.artists[ix].spotifyId)}
                                         key={`artist-title-${artist.spotifyId}-${ix}`}
                                     >
                                         {artist.title}
