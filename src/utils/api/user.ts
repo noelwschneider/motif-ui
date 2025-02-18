@@ -19,7 +19,7 @@ export default function addUser(api: MotifApiInstance): void {
     api.user = {
         fetchUser: async (userId: string): Promise<UserResponse | null> => {
             const response = await api.get(`${urlPrefix}/${userId}`);
-            return response?.data || null;
+            return response?.data || response || null;
         }, 
     };
 };

@@ -26,6 +26,7 @@ export default function LoginModal({
         };
 
         return () => document.body.style.overflow = 'unset';
+        
     }, [isOpen]);
 
     const handleClose = () => {
@@ -39,7 +40,7 @@ export default function LoginModal({
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          handleLogin();
+          handleLogin(email, password);
           handleClose();
         } catch (err) {
           console.error(err);
