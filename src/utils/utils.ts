@@ -17,7 +17,7 @@ export function getCookie(name: string): string | null {
 
 export function getSelectedItemData(
     itemId: string,
-    albumIndex: number | null,
+    // albumIndex: number | null,
     artistProfile,
 ) {
     if (!artistProfile) return null;
@@ -36,6 +36,8 @@ export function getSelectedItemData(
             albumType: null,
         };
     }
+
+    const albumIndex = getAlbumIndex(itemId, artistProfile);
 
     if (albumIndex !== null && itemId === artistProfile.albums[albumIndex]?.spotifyId) {
         const albumObj = artistProfile.albums[albumIndex];
