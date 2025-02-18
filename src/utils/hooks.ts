@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import api from "app/api";
 import { AppContext } from "contexts";
+import { formatDuration } from "./utils";
+
 
 export function useCurrentUser() {
     const { user } = useContext(AppContext);
@@ -114,6 +116,102 @@ export function useUser() {
     };
 };
 
-export function useArtist() {
 
+export function useArtist(id=null) {
+    const [artistId, setArtistId] = useState(id);
+    const [artist, setArtist] = useState(null);
+    const [contentId, setContentId] = useState(null);
+    const [content, setContent] = useState(null);
+    // const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const fetchArtist = async () => {
+            try {
+                const [artistProfile, reviews] = await Promise.all([
+                    api.spotify.artistProfile(artistId),
+                    api.reviews.getArtist(artistId)
+                ]);
+                setArtist({...artistProfile, reviews})
+            } catch (err) {
+                console.error(err);
+            };
+        };
+        if (artistId) fetchArtist();
+
+        return () => setArtist(null);
+    }, [artistId]);
+
+    useEffect(() => {
+        const selectedContent = getArtistContent(artist, contentId);
+        setContent(selectedContent);
+    }, [artist, contentId]);
+
+    useEffect(() => {
+        console.group('artist state updated');
+        console.log('artist:', artist);
+        console.log('content:', content);
+        console.groupEnd();
+    }, [artist, content]);
+
+    return {
+        artist,
+        content,
+        setArtistId,
+        setContentId,
+    };
+};
+
+
+function getArtistContent(artist, itemId = null) {
+    if (!artist) return null;
+
+    if (itemId === artist.spotifyId || itemId === null) return {
+        spotifyId: artist.spotifyId,
+        spotifyArtistId: artist.spotifyId,
+        title: artist.title,
+        popularity: artist.popularity,
+        imageUrl: artist.images[1]?.url ?? '',
+        releaseYear: null,
+        duration: null,
+        explicit: null,
+        isPlayable: null,
+        albumType: null,
+        albumIndex: null,
+    };
+
+    let count = 0;
+    for (const album of artist?.albums || []) {
+        if (itemId === album?.spotifyId) return {
+            spotifyId: album?.spotifyId,
+            spotifyArtistId: artist?.spotifyId,
+            title: album?.title,
+            popularity: album?.popularity,
+            imageUrl: album?.images[1]?.url ?? '',
+            releaseYear: album?.releaseDate.slice(0, 4),
+            duration: formatDuration(album?.tracks?.reduce((acc, cur) => acc + cur.durationMs, 0)),
+            explicit: null,
+            isPlayable: null,
+            albumType: album?.albumType,
+            albumIndex: count,
+        };
+
+        for (const track of album?.tracks || []) {
+            if (itemId === track?.spotifyId) return {
+                spotifyId: track?.spotifyId,
+                spotifyArtistId: artist?.spotifyId,
+                title: track?.title,
+                popularity: 'todo',
+                imageUrl: album?.images[1]?.url ?? '',
+                releaseYear: album?.releaseDate.slice(0, 4),
+                duration: formatDuration(track?.durationMs),
+                explicit: track?.explicit,
+                isPlayable: track?.isPlayable,
+                albumType: album?.albumType,
+                albumIndex: count,
+            };
+        };
+        count++;
+    };
+
+    return null;
 }
