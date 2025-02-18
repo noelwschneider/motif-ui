@@ -5,8 +5,8 @@ import { formatDuration } from "./utils";
 
 
 export function useCurrentUser() {
-    const { user } = useContext(AppContext);
-    return user;
+    const { currentUser } = useContext(AppContext);
+    return currentUser;
 };
 
 export function useGlobalSearch() {
@@ -71,8 +71,22 @@ export function useSearch(fn, config={
 };
 
 
-export function useUser() {
-    const [user, setUser] = useState();
+export function useAuthorizedUser() {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const verifyUser = async () => {
+          try {
+            const userResponse = await api.auth.verify();
+            setUser(userResponse);
+          } catch (err) {
+            console.error(err);
+            setUser(null);
+          };
+        };
+
+        verifyUser();
+    }, []);
 
     const handleLogin = async (email, password) => {
         try {
@@ -93,25 +107,33 @@ export function useUser() {
         };
     };
 
-    useEffect(() => {
-        const verifyUser = async () => {
-          try {
-            const userResponse = await api.auth.verify();
-            // todo: convert userResponse.data.userId to number instead of string
-            setUser(userResponse?.data);
-          } catch (err) {
-            console.error(err);
-            setUser(null);
-          }
-        };
+    return {...user, handleLogin, handleLogout};
+};
 
-        verifyUser();
-    }, []);
+export function useUser(id=null) {
+    const [user, setUser] = useState(null);
+    const [userId, setUserId] = useState(id);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            if (!userId) return;
+
+            try {
+                const [userResponse, reviews, catalogs] = await Promise.all([
+                    api.user.fetchUser(userId),
+                    api.reviews.getUser(userId),
+                    api.catalogs.getUserPublicCatalogs(userId)
+                ]);
+                setUser({...userResponse, reviews, catalogs});
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        fetchUser();
+    }, [userId]);
 
     return {
-        handleLogin,
-        handleLogout,
-        setUser,
+        setUserId,
         user,
     };
 };
@@ -145,13 +167,6 @@ export function useArtist(id=null) {
         const selectedContent = getArtistContent(artist, contentId);
         setContent(selectedContent);
     }, [artist, contentId]);
-
-    useEffect(() => {
-        console.group('artist state updated');
-        console.log('artist:', artist);
-        console.log('content:', content);
-        console.groupEnd();
-    }, [artist, content]);
 
     return {
         artist,

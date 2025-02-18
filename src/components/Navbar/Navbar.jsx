@@ -8,9 +8,9 @@ import { useCurrentUser, useGlobalSearch } from 'hooks';
 
 export default function Navbar() {
     const [modalOpen, setModalOpen] = useState(false);
-    const { user } = useCurrentUser();
+    const currentUser = useCurrentUser();
     const { query, setQuery } = useGlobalSearch();
-
+    
     return (
         <nav className={styles["navbar"]}>
             <div className={styles["navbar-container"]}>
@@ -27,8 +27,8 @@ export default function Navbar() {
 
                 <div className={styles['navbar-user-options']}>
                     <div className={styles['user-dropdown']}>
-                        { user ? 
-                            <UserDropdown user={user} /> 
+                        { currentUser.userId ? 
+                            <UserDropdown user={currentUser} /> 
                             : <LoginButton onClick={() => setModalOpen(true)} />
                         }
                     </div>

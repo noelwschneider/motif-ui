@@ -1,16 +1,16 @@
 import { AppContext } from "contexts";
-import { useSearch, useUser } from "hooks";
+import { useSearch, useAuthorizedUser } from "hooks";
 import api from "app/api";
 
 
 export default function AppProvider({ children }) {
-    const user = useUser();
+    const currentUser = useAuthorizedUser();
     const search = useSearch(api.spotify.search);
 
     return (
         <AppContext.Provider value={{
             search,
-            user
+            currentUser
         }}>
             { children }
         </AppContext.Provider>
