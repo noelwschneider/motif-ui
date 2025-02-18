@@ -1,13 +1,20 @@
 import styles from './GlobalSearchResults.module.css';
 import { useState } from 'react';
-import { useGlobalSearch } from 'hooks';
+import { useArtist, useGlobalSearch } from 'hooks';
 
 
 // todo: get album popularity score into the return
 // todo: pagination
-export default function GlobalSearchResults({ handleSearchClick }) {
+export default function GlobalSearchResults() {
     const [contentType, setContentType] = useState<'artists' | 'albums' | 'tracks'>('artists');
     const { searchResults } = useGlobalSearch();
+    const { setContentId, setArtistId } = useArtist();
+
+    // todo: accept tracks w/ multiple artists
+    const handleClick = async (selectedArtistId: string, selectedItemId?: string) => {
+        setContentId(selectedItemId);
+        setArtistId(selectedArtistId);
+    };
 
     return (
         <div className={styles['search-container']}>
@@ -37,12 +44,12 @@ export default function GlobalSearchResults({ handleSearchClick }) {
                     <img className={styles['search-item-image'] + ' clickable'}
                         src={item?.images[2]?.url ?? ''}
                         alt={`Image for ${item?.title}`}
-                        onClick={() => contentType === 'artists' ? handleSearchClick(item?.spotifyId, item?.spotifyId) : handleSearchClick(item?.artists[0].spotifyId, item?.spotifyId)}
+                        onClick={() => contentType === 'artists' ? handleClick(item?.spotifyId, item?.spotifyId) : handleClick(item?.artists[0].spotifyId, item?.spotifyId)}
                     />
 
                     <div className={styles['search-item-text']}>
                         <h2 className={styles['search-item-title'] + ' clickable'}
-                            onClick={() => contentType === 'artists' ? handleSearchClick(item?.spotifyId, item?.spotifyId) : handleSearchClick(item?.artists[0].spotifyId, item?.spotifyId)}
+                            onClick={() => contentType === 'artists' ? handleClick(item?.spotifyId, item?.spotifyId) : handleClick(item?.artists[0].spotifyId, item?.spotifyId)}
                         >
                             {item.title}
                         </h2>
@@ -55,7 +62,7 @@ export default function GlobalSearchResults({ handleSearchClick }) {
                                 
                                 {item.artists.map((artist, ix) => (
                                     <span className={styles['search-item-artist'] + ' clickable'}
-                                        onClick={() => handleSearchClick(item?.artists[ix].spotifyId, item?.artists[ix].spotifyId)}
+                                        onClick={() => handleClick(item?.artists[ix].spotifyId, item?.artists[ix].spotifyId)}
                                         key={`artist-title-${artist.spotifyId}-${ix}`}
                                     >
                                         {artist.title}

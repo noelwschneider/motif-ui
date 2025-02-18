@@ -1,7 +1,7 @@
 import styles from './ArtistProfile.module.css';
 import { Plus } from 'react-feather';
 import { useState } from 'react';
-import ReviewModal from '../ReviewModal/ReviewModal';
+import ReviewModal from 'components/ReviewModal/ReviewModal';
 import AlbumList from './AlbumList';
 import { Star } from 'react-feather';
 
@@ -13,12 +13,7 @@ import { Star } from 'react-feather';
 // stretch: add alternate track view
 // stretch: open in spotify
 // stretch: suspense/placeholder UI
-export default function ArtistProfile({ 
-    albumIndex,
-    artistProfile,
-    handleClick,
-    item,
-}) {
+export default function ArtistProfile() {
     const [modalOpen, setModalOpen] = useState(false);
     const [showAlbums, setShowAlbums] = useState();
     

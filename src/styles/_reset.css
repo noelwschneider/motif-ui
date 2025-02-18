@@ -69,3 +69,8 @@ textarea:not([rows]) {
 :target {
   scroll-margin-block: 5ex;
 }
+
+/* use pointer on cancel button for <input type='search'> */
+input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
