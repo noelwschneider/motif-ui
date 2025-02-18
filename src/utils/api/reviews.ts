@@ -34,6 +34,7 @@ export interface ReviewsApi {
     currentUser: () => Promise<Review[]>;
     delete: (reviewId: number) => Promise<AxiosResponse>;
     getArtist: (artistId: string) => Promise<ArtistReviews[]>;
+    getUser: (userId: number) => Promise<ArtistReviews[]>;
     update: (reviewId: number, args: Review) => Promise<AxiosResponse>;
 
 };
@@ -75,6 +76,11 @@ export default function addReviews(api: MotifApiInstance) {
 
         getArtist: async (artistId: string): Promise<ArtistReviews[]> => {
             const response = await api.get(`${urlPrefix}/artist/${artistId}`);
+            return response?.data || response || null;
+        },
+
+        getUser: async (userId: number): Promise<ArtistReviews[]> => {
+            const response = await api.get(`${urlPrefix}/user/${userId}`)
             return response?.data || response || null;
         },
     } as ReviewsApi;
