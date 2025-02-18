@@ -1,4 +1,4 @@
-import styles from './Search.module.css';
+import styles from './GlobalSearchResults.module.css';
 import { useState } from 'react';
 import { useGlobalSearch } from 'hooks';
 
