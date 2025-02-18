@@ -1,6 +1,6 @@
 import styles from './Home.module.css';
 import ArtistProfile from 'components/ArtistProfile/ArtistProfile';
-import GlobalSearchResults from 'components/Search/Search';
+import GlobalSearchResults from 'pages/GlobalSearchResults/GlobalSearchResults';
 import { useArtist } from 'hooks';
 
 
