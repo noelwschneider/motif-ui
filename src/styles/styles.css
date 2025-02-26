@@ -146,3 +146,35 @@ img {
   height: auto;
   display: block;
 }
+
+
+/* can be overridden by css modules in child components */
+.motif-modal-dialog {
+  border-radius: var(--s);
+  background-color: var(--primary-shade);
+  
+  height: 35%;
+  height: auto;
+  width: 33%;
+
+  position: fixed;
+  overflow: hidden;
+  
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  margin: 0;
+
+  z-index: 2;
+}
+.motif-modal-container {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
