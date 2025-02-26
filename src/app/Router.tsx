@@ -6,6 +6,7 @@ import Navbar from 'pages/Navbar/Navbar';
 import UserProfile from 'pages/UserProfile/UserProfile';
 import GlobalSearchResults from 'pages/GlobalSearchResults/GlobalSearchResults';
 import ArtistProfile from 'pages/ArtistProfile/ArtistProfile';
+import Sandbox from 'pages/Sandbox/Sandbox';
 
 
 export default function AppRouter() {
@@ -30,6 +31,8 @@ export default function AppRouter() {
                     element={<UserProfile />}
                 />
 
+                <Route path="/sandbox" element={<Sandbox />} />
+                
                 <Route path="/" element={<Home />} />
             </Routes>
         </Router>
