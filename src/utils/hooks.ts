@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import api from "app/api";
-import { AppContext } from "contexts";
+import api from "../app/api";
+import { AppContext } from "./contexts";
 import { formatDuration } from "./utils";
-import { useNavigate } from "react-router-dom";
 
 
 export function useCurrentUser() {
@@ -10,17 +9,22 @@ export function useCurrentUser() {
     return currentUser;
 };
 
+
 export function useGlobalSearch() {
     const { search } = useContext(AppContext);
     return search;
 };
 
+
 const DEBOUNCE_MS = 500;
+
+
 const EMPTY_SEARCH_RESULTS = {
     albums: [],
     artists: [],
     tracks: [],
 };
+
 
 export function useSearch(fn, config={
     loading: false,
@@ -55,6 +59,7 @@ export function useSearch(fn, config={
             handleSearch();
         }, DEBOUNCE_MS);
 
+        // should I reset load state here instead of the `finally`?
         return () => clearTimeout(handler);
     }, [fn, reqBody, query]);
 
@@ -110,6 +115,7 @@ export function useAuthorizedUser() {
 
     return {...user, handleLogin, handleLogout};
 };
+
 
 export function useUser(id=null) {
     const [user, setUser] = useState(null);
@@ -230,4 +236,4 @@ function getArtistContent(artist, itemId = null) {
     };
 
     return null;
-}
+};

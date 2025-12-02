@@ -2,8 +2,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import { useState } from 'react';
 import { User } from 'react-feather';
-import LoginModal from 'components/LoginModal/LoginModal';
-import { useCurrentUser, useGlobalSearch } from 'hooks';
+import LoginModal from '../../components/LoginModal/LoginModal';
+import { useCurrentUser, useGlobalSearch } from '../../utils/hooks';
 
 
 export default function Navbar() {

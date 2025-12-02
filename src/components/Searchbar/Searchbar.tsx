@@ -1,5 +1,5 @@
 import styles from './Searchbar.module.css';
-import { useSearch } from 'hooks';
+import { useSearch } from '../../utils/hooks';
 
 
 export default function Searchbar({ fn, placeholder="", }) {

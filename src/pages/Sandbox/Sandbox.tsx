@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./Sandbox.module.css";
-import Modal from "components/Modal";
+import Modal from "../../components/Modal";
 
 
 export default function Sandbox() {

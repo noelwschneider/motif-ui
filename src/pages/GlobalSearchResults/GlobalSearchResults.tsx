@@ -1,10 +1,11 @@
 import styles from './GlobalSearchResults.module.css';
 import { useState } from 'react';
-import { useArtist, useGlobalSearch } from 'hooks';
+import { useArtist, useGlobalSearch } from '../../utils/hooks';
 
 
 // todo: get album popularity score into the return
 // todo: pagination
+// todo: display a few options in list below searchbar, only navigate to this page if user clicks "see more results" option
 export default function GlobalSearchResults() {
     const [contentType, setContentType] = useState<'artists' | 'albums' | 'tracks'>('artists');
     const { searchResults } = useGlobalSearch();

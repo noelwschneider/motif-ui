@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from 'app/api';
+import api from '../../app/api';
+
 
 export default function RegisterForm() {
   const [username, setUsername] = useState('');

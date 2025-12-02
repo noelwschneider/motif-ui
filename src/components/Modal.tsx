@@ -8,6 +8,7 @@ export default function Modal({
     isOpen,
     onClose,
     onOpen,
+    styles,
 }) {
     // global styles can be overriden with a className in the parent stylesheet because they are cosmetic
     // module styles are harder to override because they are functional
@@ -34,7 +35,9 @@ export default function Modal({
             handleOpen();
         };
 
-        return () => document.body.style.overflow = 'unset';
+        return () => {
+            document.body.style.overflow = 'unset'
+        };
         
     }, [isOpen]);
 

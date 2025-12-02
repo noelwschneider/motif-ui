@@ -1,5 +1,6 @@
-import { MotifApiInstance } from "app/api";
+import { MotifApiInstance } from "../../app/api";
 import { AxiosResponse } from "axios";
+
 
 interface ArtistReviews {
     comment: string;

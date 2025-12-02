@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './ReviewModal.module.css';
-import api from 'app/api';
+import api from '../../app/api';
 import { Star, Trash2, X } from 'react-feather';
-import { useCurrentUser } from 'hooks';
+import { useCurrentUser } from '../../utils/hooks';
 
 
 // todo: close if no spotifyId in data prop

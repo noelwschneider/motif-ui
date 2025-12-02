@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import api from 'app/api';
-import { useCurrentUser } from 'hooks';
+import api from '../../app/api';
+import { useCurrentUser } from '../../utils/hooks';
 
 
 export default function Login() {

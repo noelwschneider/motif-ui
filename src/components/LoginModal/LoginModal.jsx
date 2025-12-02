@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { X } from 'react-feather';
 import styles from './LoginModal.module.css';
-import { useCurrentUser } from 'hooks';
+import { useCurrentUser } from '../../utils/hooks';
 
 
 export default function LoginModal({

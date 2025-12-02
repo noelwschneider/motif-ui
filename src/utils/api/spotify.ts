@@ -1,4 +1,4 @@
-import { MotifApiInstance } from "app/api";
+import { MotifApiInstance } from "../../app/api";
 
 
 export default function addSpotify(api: MotifApiInstance) {

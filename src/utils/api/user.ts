@@ -1,4 +1,5 @@
-import { MotifApiInstance } from "app/api";
+import { MotifApiInstance } from "../../app/api";
+
 
 export interface UserResponse {
     id: number;

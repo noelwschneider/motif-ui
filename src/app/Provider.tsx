@@ -1,6 +1,6 @@
-import { AppContext } from "contexts";
-import { useSearch, useAuthorizedUser } from "hooks";
-import api from "app/api";
+import { AppContext } from "../utils/contexts";
+import { useSearch, useAuthorizedUser } from "../utils/hooks";
+import api from "./api";
 
 
 export default function AppProvider({ children }) {
