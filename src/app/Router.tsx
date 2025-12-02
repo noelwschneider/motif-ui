@@ -5,7 +5,7 @@ import RegisterForm from '../pages/Register';
 import Navbar from '../pages/Navbar';
 import UserProfile from '../pages/UserProfile';
 import GlobalSearchResults from '../pages/GlobalSearchResults';
-import ArtistProfile from '../pages/ArtistProfile/ArtistProfile';
+import ArtistProfile from '../pages/ArtistProfile';
 
 
 export default function AppRouter() {

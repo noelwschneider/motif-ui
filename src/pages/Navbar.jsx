@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { User } from 'react-feather';
-import LoginModal from '../components/LoginModal/LoginModal';
+import LoginModal from '../components/LoginModal';
 import { useCurrentUser, useGlobalSearch } from '../utils/hooks';
 
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useArtist, useGlobalSearch } from '../utils/hooks';
 
+// todo: simplify by just searching for artists right now, loop in track/album lookup after I've got MVP
 
 // todo: get album popularity score into the return
 // todo: pagination

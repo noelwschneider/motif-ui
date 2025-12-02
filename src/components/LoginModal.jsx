@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { X } from 'react-feather';
-import styles from './LoginModal.module.css';
-import { useCurrentUser } from '../../utils/hooks';
+import { useCurrentUser } from '../utils/hooks';
 
 
 export default function LoginModal({
@@ -50,23 +49,23 @@ export default function LoginModal({
 
     return (
         <div>
-            <dialog className={styles['login-modal']} 
+            <dialog className='login-modal'
                 ref={dialogRef} 
                 open={isOpen}
             >
-                <div className={styles['modal-header']}>
-                    <h1 className={styles['modal-title']}>
+                <div className='modal-header'>
+                    <h1 className='modal-title'>
                         Login
                     </h1>
 
-                    <X className={styles['close-btn'] + ' clickable'}
+                    <X className='close-btn clickable'
                         onClick={handleClose}
                     />
                 </div>
                 
 
                 <form onSubmit={handleSubmit}>
-                    <div className={styles['modal-inputs']}>
+                    <div className='modal-inputs'>
                         <input placeholder='Email'
                             type="email"
                             value={email}
@@ -82,8 +81,8 @@ export default function LoginModal({
                         />
                     </div>
           
-                    <div className={styles["modal-btns"]}>
-                        <button className={styles['submit-btn']}
+                    <div className="modal-btns">
+                        <button className='submit-btn'
                             type="submit"
                         >
                             Login
@@ -92,7 +91,7 @@ export default function LoginModal({
                 </form>
             </dialog>
 
-            <div className={styles['modal-container']}
+            <div className='modal-container'
                 onClick={handleClose}
             ></div>
         </div>

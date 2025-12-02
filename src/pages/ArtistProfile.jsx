@@ -1,7 +1,6 @@
 import { Plus } from 'react-feather';
 import { useState } from 'react';
-import ReviewModal from 'components/ReviewModal/ReviewModal';
-import AlbumList from './AlbumList';
+import ReviewModal from '../components/ReviewModal';
 import { Star } from 'react-feather';
 
 
@@ -115,4 +114,74 @@ export default function ArtistProfile() {
             </>}
         </div>
     );
+};
+
+
+function AlbumList({
+    activeItemId,
+    albumIndex,
+    albums=[],
+    artistId,
+    handleClick,
+}) {
+    return (
+        <div className='album-list'>
+            {albums.sort(
+                (a, b) => a.releaseDate > b.releaseDate ? -1 : 1
+            )?.map((album, ix) => (
+                <div className='album-container'
+                    key={`artist-album-list-${ix}`}
+                >
+                    <div className='album-row'>
+                        <img className='album-image clickable'
+                            src={album.images[2]?.url}
+                            onClick={() => (albumIndex === ix ?
+                                handleClick(artistId)
+                                : handleClick(artistId, album.spotifyId, ix)
+                           )}
+                        ></img>
+
+                        <div className='album-text'>
+                            <h2 className={'album-title clickable' + (activeItemId === album.spotifyId ? ' text-primary' : '')}
+                                onClick={() => (albumIndex === ix ?
+                                    handleClick(artistId)
+                                    : handleClick(artistId, album.spotifyId, ix)
+                                )}
+                            >
+                                {album.title}
+                            </h2>
+
+                            <h3 className='album-year'>
+                                {album.releaseDate.slice(0,4)}
+                            </h3>
+                        </div>
+                    </div>
+
+                    {albumIndex === ix && (
+                        <div className='track-list'>
+                            {album.tracks.sort(
+                                (a,b) => a.trackNumber - b.trackNumber
+                            ).map((track, trackIndex) => (
+                                <div className='track-row'
+                                    key={`album-${ix}-track-${trackIndex}`}
+                                >
+                                    <span className='track-order'>
+                                        {track.trackNumber}
+                                    </span>
+                                    <span className={'track-title clickable' + ( activeItemId === track.spotifyId ? ' text-primary' : '' )}
+                                        onClick={() => {handleClick(artistId, track.spotifyId, ix)}}
+                                    >
+                                        {track.title}
+                                    </span>
+                                    <span className='track-duration'>
+                                        {`${Math.floor(track.durationMs / 60000)}:${Math.floor(track.durationMs % 60000 / 1000)}`}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            ))}
+        </div>
+    )
 };

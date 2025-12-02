@@ -7,6 +7,9 @@ export default function UserProfile() {
     const { userId } = useParams();
     const [userProfile, setUserProfile] = useState(null);
 
+    return <p>TODO</p>
+    
+    // bug: this is causing infinite loop refresh
     // todo: seems like it ought to be a hook
     useEffect(() => {
         if (userProfile) return;
