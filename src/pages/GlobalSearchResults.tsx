@@ -1,6 +1,5 @@
-import styles from './GlobalSearchResults.module.css';
 import { useState } from 'react';
-import { useArtist, useGlobalSearch } from '../../utils/hooks';
+import { useArtist, useGlobalSearch } from '../utils/hooks';
 
 
 // todo: get album popularity score into the return
@@ -18,12 +17,12 @@ export default function GlobalSearchResults() {
     };
 
     return (
-        <div className={styles['search-container']}>
-            <fieldset className={styles['content-type-radio-group']}>
+        <div className='search-container'>
+            <fieldset className='content-type-radio-group'>
                 { (['artists', 'albums', 'tracks'] as const).map((type, ix) => (
                     <div key={`content-radio-${type}-${ix}`}>
                         <input id={`content-choice-${type}`}
-                            className={styles['content-type-radio-btn']}
+                            className='content-type-radio-btn'
                             type="radio"
                             name="contentType"
                             value={type}
@@ -39,36 +38,36 @@ export default function GlobalSearchResults() {
             </fieldset>
                     
             {searchResults[contentType].map((item) => (
-                <div className={styles['search-item']}
+                <div className='search-item'
                     key={`search-result-item-${item?.spotifyId}`}
                 >
-                    <img className={styles['search-item-image'] + ' clickable'}
+                    <img className='search-item-image clickable'
                         src={item?.images[2]?.url ?? ''}
                         alt={`Image for ${item?.title}`}
                         onClick={() => contentType === 'artists' ? handleClick(item?.spotifyId, item?.spotifyId) : handleClick(item?.artists[0].spotifyId, item?.spotifyId)}
                     />
 
-                    <div className={styles['search-item-text']}>
-                        <h2 className={styles['search-item-title'] + ' clickable'}
+                    <div className='search-item-text'>
+                        <h2 className='search-item-title clickable'
                             onClick={() => contentType === 'artists' ? handleClick(item?.spotifyId, item?.spotifyId) : handleClick(item?.artists[0].spotifyId, item?.spotifyId)}
                         >
                             {item.title}
                         </h2>
 
                         { item.artists?.length > 0 && 
-                            <h3 className={styles['search-item-artists-list']}>
-                                <span className={styles['search-item-plaintext']}>
+                            <h3 className='search-item-artists-list'>
+                                <span className='search-item-plaintext'>
                                     {'by '}
                                 </span>
                                 
                                 {item.artists.map((artist, ix) => (
-                                    <span className={styles['search-item-artist'] + ' clickable'}
+                                    <span className='search-item-artist clickable'
                                         onClick={() => handleClick(item?.artists[ix].spotifyId, item?.artists[ix].spotifyId)}
                                         key={`artist-title-${artist.spotifyId}-${ix}`}
                                     >
                                         {artist.title}
                                         {ix + 1 !== item.artists.length && 
-                                            <span className={styles['search-item-plaintext']}>, </span>
+                                            <span className='search-item-plaintext'>, </span>
                                         }   
                                     </span>
                                 ))}

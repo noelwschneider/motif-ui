@@ -1,9 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
-import styles from './Navbar.module.css';
 import { useState } from 'react';
 import { User } from 'react-feather';
-import LoginModal from '../../components/LoginModal/LoginModal';
-import { useCurrentUser, useGlobalSearch } from '../../utils/hooks';
+import LoginModal from '../components/LoginModal/LoginModal';
+import { useCurrentUser, useGlobalSearch } from '../utils/hooks';
 
 
 export default function Navbar() {
@@ -18,16 +17,16 @@ export default function Navbar() {
     };
     
     return (
-        <nav className={styles["navbar"]}>
-            <div className={styles["navbar-container"]}>
+        <nav className="navbar">
+            <div className="navbar-container">
                 <Link to="/" 
-                    className={styles["navbar-logo"] + ' clickable'} 
+                    className="navbar-logo clickable" 
                     onClick={() => setQuery('')}
                 >
                     motif
                 </Link>
 
-                <input className={styles["global-searchbar"]}
+                <input className="global-searchbar"
                     type="search"
                     value={query}
                     // onChange={(e) => setQuery(e.target.value)}
@@ -35,8 +34,8 @@ export default function Navbar() {
                     placeholder="Search for music"
                 />
 
-                <div className={styles['navbar-user-options']}>
-                    <div className={styles['user-dropdown']}>
+                <div className='navbar-user-options'>
+                    <div className='user-dropdown'>
                         { currentUser.userId ? 
                             <UserDropdown user={currentUser} /> 
                             : <LoginButton onClick={() => setModalOpen(true)} />
@@ -60,13 +59,13 @@ function UserDropdown({ user }) {
     const { handleLogout } = useCurrentUser();
 
     return (
-        <div className={styles['dropdown-container']}>
-            <div className={styles['navbar-user']}>
+        <div className='dropdown-container'>
+            <div className='navbar-user'>
                 <h3>{user.displayName}</h3>
-                <User className={styles['user-icon'] + ' clickable'} /> 
+                <User className='user-icon clickable' /> 
             </div>
             
-            <ul className={styles['dropdown-menu']}>
+            <ul className='dropdown-menu'>
                 <li><Link to={`/user/${user?.userId}`}>Profile</Link></li>
                 <li onClick={handleLogout}>Logout</li>
             </ul>
@@ -77,7 +76,7 @@ function UserDropdown({ user }) {
 
 function LoginButton({ onClick }) {
     return (
-        <button className={styles['login-btn']}
+        <button className='login-btn'
             onClick={onClick}
         >
             Login

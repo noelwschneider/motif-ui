@@ -1,4 +1,3 @@
-import styles from './ArtistProfile.module.css';
 import { Plus } from 'react-feather';
 import { useState } from 'react';
 import ReviewModal from 'components/ReviewModal/ReviewModal';
@@ -18,11 +17,10 @@ export default function ArtistProfile() {
     const [showAlbums, setShowAlbums] = useState();
     
     return (
-        <div className={styles['artist-profile-container']}>
+        <div className='artist-profile-container'>
             {item && <>
-                <div className={styles["artist-data-container"]}>
-                    <h1 className={ styles['artist-name'] + 
-                        ' clickable' 
+                <div className="artist-data-container">
+                    <h1 className={'artist-name clickable ' 
                         + (item?.spotifyId === artistProfile?.spotifyId ? ' text-primary' : '')}
                         onClick={() => { 
                             setShowAlbums(false);
@@ -33,11 +31,11 @@ export default function ArtistProfile() {
                     </h1>
 
                     {['albums', 'singles', 'compilations'].map((albumType) => (<>
-                        <h1 className={styles['album-type-header'] + ' clickable'}
+                        <h1 className='album-type-header clickable'
                             onClick={() => {setShowAlbums(showAlbums === albumType ? null : albumType)}}
                         >
                             {albumType} 
-                            <span className={styles['album-type-count']}>
+                            <span className='album-type-count'>
                                 ({artistProfile[albumType].length})
                             </span>
                         </h1>
@@ -54,31 +52,31 @@ export default function ArtistProfile() {
                     </>))}
                 </div>
 
-                <div className={styles['motif-data-container']}>        
-                    <img className={styles['item-image']}
+                <div className='motif-data-container'>        
+                    <img className='item-image'
                         src={item.imageUrl}
                     ></img>
 
-                    <h1 className={styles['item-title']}>
+                    <h1 className='item-title'>
                         {item.title}
                     </h1>
                     
-                    <h2 className={styles['reviews-header']}>
+                    <h2 className='reviews-header'>
                         Reviews
                     </h2>
 
                     {/* todo: average review score */}
                     {/* todo: total reviews */}
 
-                    <Plus className={styles['add-review-button'] + ' clickable'} 
+                    <Plus className='add-review-button clickable'
                         onClick={() => setModalOpen(true)}
                     />
 
                     { artistProfile?.reviews?.[item.spotifyId]?.map((review, ix) => (
-                        <div className={styles['item-review']}
+                        <div className='item-review'
                             key={`profile-item-${item.spotifyId}-review-${ix}`}
                         >
-                            <div className={styles['review-stars-container']}>
+                            <div className='review-stars-container'>
                                 { Array.from({length: review.rating}, () => (
                                     <Star className={styles['review-star']} />
                                 ))}
@@ -87,12 +85,12 @@ export default function ArtistProfile() {
                                 ))}
                             </div>
 
-                            <h3 className={styles['review-username'] + ' clickable'}>
+                            <h3 className='review-username clickable'>
                                 {review.displayName}
                             </h3>
 
                             { review.comment && 
-                                <p className={styles['review-comment']}>
+                                <p className='review-comment'>
                                     "{review.comment}"
                                 </p>
                             }

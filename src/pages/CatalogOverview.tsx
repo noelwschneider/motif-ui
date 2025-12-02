@@ -1,8 +1,6 @@
 
 
 export default function CatalogOverview({ catalog }) {
-    console.log('catalog:', catalog);
-
     return (
         <div>
             <h1>{catalog?.name}</h1>
@@ -27,8 +25,6 @@ export default function CatalogOverview({ catalog }) {
 function CatalogItem({ item }) {
     const dataType = item?.motif_data?.data_type;
     const itemData = item?.motif_data?.[dataType];
-
-    console.log('catalog item:', item);
 
     return (
         <div>

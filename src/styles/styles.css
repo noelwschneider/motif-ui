@@ -178,3 +178,470 @@ img {
   background: rgba(0, 0, 0, 0.5);
   overflow: hidden;
 }
+
+.home-container {
+  display: flex;
+  flex-direction: row;
+  min-width: 0;
+  justify-content: space-between;
+}
+
+.search-container {
+    flex: 1 1 25%;
+    padding: var(--m) var(--s);
+    background-color: var(--primary-shade);
+
+    min-width: 0%;
+    transition: flex-basis 1s ease-out;
+    text-overflow: hidden;
+    overflow-x: hidden;
+
+    min-height: calc(100vh - 100px);
+
+    border-radius: var(--s);
+    margin: var(--xs);
+}
+.expand { 
+    flex: 1 0 25%;
+    transition: flex-basis 0.3s ease-out;
+    min-width: 25%;
+}
+.collapse { 
+    flex: 0 0 1%; 
+    cursor: pointer;
+    transition: flex-basis 0.4s ease-in-out;
+    background-color: var(--primary);
+
+    &:hover { 
+        background-color: var(--primary-shade);
+        flex: 0 0 3%;
+    }
+}
+
+/* Searchbar */
+.searchbar-input {
+    padding: var(--s);
+    width: 100%;
+    margin-bottom: var(--s);
+}
+.searchbar-btn {
+    padding: var(--s);
+}
+.content-type-radio-group {
+    width: 100%;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: var(--s);
+    border-radius: var(--s);
+    margin: 0;
+    padding: var(--xs);
+}
+.content-type-radio-legend {}
+.content-type-radio-btn {
+    accent-color: var(--primary);
+    &:focus { box-shadow: none; }
+}
+
+/* Search results */
+.search-item {
+    display: flex;
+    flex-direction: row;
+    height: var(--xxl);
+    margin: var(--s) 0;
+}
+.search-item-image {
+    margin: 0 var(--s);
+    height: var(--xxl);
+    width: var(--xxl);
+    aspect-ratio: 1/1;
+    border-radius: var(--xs);
+    border: 1px solid var(--dark);
+}
+.search-item-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.search-item-title {
+    font-size: var(--l);
+    flex: 0 0 63%;
+    text-wrap: nowrap;
+
+}
+.search-item-artists-list {
+    font-style: italic;
+    text-wrap: nowrap;
+    flex: 0 0 37%;
+    overflow: hidden;
+}
+.search-item-plaintext { 
+    color: var(--primary-tint);
+}
+.search-item-artist {
+    font-size: var(--m);
+}
+
+/* Skeleton UI */
+.skeleton-item {
+    display: flex;
+    flex-direction: row;
+    height: var(--xxl);
+    margin: var(--s) 0;
+    align-items: end;
+}
+.skeleton-img {
+    height: var(--xxl);
+    width: var(--xxl);
+    aspect-ratio: 1/1;
+    margin: 0 var(--s);
+    border-radius: var(--s);
+    background-color: var(--gray);
+    border: 1px solid var(--dark);
+}
+.skeleton-text {
+    background-color: var(--gray-tint);
+    height: 50%;
+    width: 100%;
+    border-radius: var(--s);
+    border: 1px solid var(--dark);
+}
+
+
+.navbar {
+    /* padding: 0 0 var(--xxs) var(--s); */
+    background-color: var(--gray-1);
+}
+
+.navbar-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.navbar-logo {
+    margin-left: var(--s);
+    color: var(--primary);
+    font-family: var(--ff-logo);
+    font-size: var(--xl);
+    width: min-content;
+
+    &:focus { text-decoration: none; }
+    &:hover { text-decoration: none; }
+}
+.navbar-user-options {
+    text-align: end;
+}
+.user-icon {
+    background-color: var(--primary);
+    color: var(--dark);
+    border-radius: 100%;
+}
+.navbar-menu {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: start;
+    gap: var(--m);
+    list-style: none;
+    padding: 0;
+}
+
+.navbar-link {
+    color: var(--line);
+    font-size: var(--m);
+
+    &:hover {
+        color: var(--primary);
+        text-decoration: none;
+    }
+}
+
+.login-btn {
+    margin: var(--s) 0;
+}
+
+
+.global-searchbar {
+    padding: var(--s);
+    margin-bottom: var(--s);
+}
+
+.navbar-user {
+    display: flex;
+    gap: var(--m);
+    margin: var(--s);
+    align-items: end;
+    direction: ltr;
+}
+
+
+
+
+.dropdown {
+    ul {
+        visibility: hidden;
+    }
+
+    &:hover {
+        ul { visibility: visible; }
+    }
+}
+
+.dropdown-container {
+    justify-content: flex-start;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    margin-right: var(--s);
+    padding: 0;
+    direction: rtl;
+
+    .dropdown-menu {
+        cursor: auto;
+        position: absolute;
+        visibility: hidden;
+        display: none;
+        list-style-type: none;
+        margin: 0;
+        padding: var(--s);
+        background-color: var(--light);
+        color: var(--dark);
+
+        transition: all 0.5s ease;
+
+        width: 137%;
+    }
+
+    &:hover .dropdown-menu {
+        visibility: visible;
+        display: block;
+    }
+
+    li {
+        border-bottom: 1px solid var(--gray);
+        cursor: pointer;
+        direction: ltr;
+
+        &:hover { color: var(--primary-shade); }
+    }
+}
+
+.user {
+    /* border: 1px solid red; */
+    
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    width: 100%;
+}
+
+.profile-header {
+    /* border: 1px solid blue; */
+    
+    flex: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.activity-container {
+    /* border: 1px solid green; */
+    height: 100%;
+
+    flex: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.catalogs-summary {
+    /* border: 1px solid purple; */
+    width: 50%;
+}
+.catalog-items {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.catalog-item {
+    margin: 1rem;
+    height: 10rem;
+    width: 10rem;
+}
+.catalog-thumbnail {
+    border: 1px solid var(--light);
+    height: 90%;
+}
+.catalog-title {
+    height: 10%;
+}
+
+.reviews-summary {
+    /* border: 1px solid orange; */
+    width: 50%;
+}
+.review-items {
+    display: flex;
+    flex-direction: column;
+}
+.review-item {
+    display: flex;
+    flex-direction: column;
+
+    h3, p, div, img { 
+        display: inline-block;
+        margin: 1rem;
+    }
+    .review-comment { display: block; }
+}
+
+/* CONTAINERS */
+.artist-profile-container {
+    flex: 1 1 75%;
+    min-width: 0;
+    display: flex;
+    flex-direction: row;
+    padding: var(--s);
+}
+
+/* ARTIST CONTENT */
+.artist-data-container {
+    flex: 1 1 50%;
+    min-width: 0;
+    width: 100%;
+    max-width: 50%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.artist-name {
+    color: var(--primary);
+    cursor: pointer;
+}
+.album-type-header {
+    font-style: italic;
+}
+.album-type-count {
+    color: var(--gray);
+    margin-left: var(--s);
+}
+.album-row {
+    display: flex;
+    margin: var(--s) 0;
+    height: var(--xxl);
+    overflow: hidden;
+    text-wrap: nowrap;
+    &:hover { overflow: visible; }
+}
+.album-image {
+    margin: 0 var(--s);
+    height: var(--xxl);
+    width: var(--xxl);
+    aspect-ratio: 1/1;
+    border-radius: var(--xs);
+}
+.album-text {
+    display: flex;
+    flex-direction: column;
+}
+.album-year { 
+    color: var(--gray); 
+}
+.album-title {
+    font-size: var(--l);
+    overflow: hidden;
+    text-wrap: nowrap;
+    margin: 0;
+    padding: 0;
+    width: min-content;
+
+    &:hover { overflow-x: visible; }
+}
+
+/* TRACKS */
+.track-list { margin: var(--s); }
+.track-order { color: var(--gray); }
+.track-title { margin: var(--s); }
+.track-duration { color: var(--gray); }
+
+
+/* ACTIVE ITEM */
+.motif-data-container {
+    flex: 0 0 3;
+    min-width: 0;
+    width: 324px;
+    max-width: 50%;
+    
+    position: sticky;
+    top: var(--m);
+    height: calc(100vh - 100px);
+    
+    background-color: black;
+    border-radius: var(--s);
+    padding: var(--s);
+    margin-left: auto;
+
+    overflow-y: scroll;
+}
+.add-review-button {
+    color: var(--primary);
+}
+.item-image {
+    border: 1px solid var(--light);
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: var(--s);
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 1/1;
+}
+.item-title {
+    color: var(--primary);
+}
+.item-year {}
+.item-duration {}
+.item-explicit {
+    color: var(--red);
+    font-style: italic;
+}
+
+.reviews-header {
+    display: inline-block;
+}
+.item-review {
+    margin: var(--s);
+    background-color: var(--gray-shade);
+    border-radius: var(--s);
+    padding: var(--s);
+    line-height: 1;
+}
+.review-stars-container {
+    display: inline-block;
+    margin-right: var(--s);
+}
+.review-star {
+    stroke: var(--primary);
+    fill: var(--primary);
+    height: var(--s);
+    width: var(--s);
+    display: inline-block;
+}
+.review-star-empty {
+    stroke: var(--primary);
+    fill: none;
+    height: var(--s);
+    width: var(--s);
+    display: inline-block;
+}
+.review-username {
+    display: inline-block;
+    color: var(--light);
+}
+.review-comment {
+    font-style: italic;
+    display: block;
+    margin-left: var(--s);
+}

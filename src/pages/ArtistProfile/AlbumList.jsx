@@ -1,5 +1,3 @@
-import styles from './ArtistProfile.module.css';
-
 
 export default function AlbumList({
     activeItemId,
@@ -9,15 +7,15 @@ export default function AlbumList({
     handleClick,
 }) {
     return (
-        <div className={styles['album-list']}>
+        <div className='album-list'>
             {albums.sort(
                 (a, b) => a.releaseDate > b.releaseDate ? -1 : 1
             )?.map((album, ix) => (
-                <div className={styles['album-container']}
+                <div className='album-container'
                     key={`artist-album-list-${ix}`}
                 >
-                    <div className={styles['album-row']}>
-                        <img className={styles['album-image'] + ' clickable'}
+                    <div className='album-row'>
+                        <img className='album-image clickable'
                             src={album.images[2]?.url}
                             onClick={() => (albumIndex === ix ?
                                 handleClick(artistId)
@@ -25,12 +23,8 @@ export default function AlbumList({
                            )}
                         ></img>
 
-
-                        <div className={styles['album-text']}>
-                            <h2 className={ styles['album-title'] 
-                                    + ' clickable' 
-                                    + ( activeItemId === album.spotifyId ? ' text-primary' : ''
-                                )}
+                        <div className='album-text'>
+                            <h2 className={'album-title clickable' + (activeItemId === album.spotifyId ? ' text-primary' : '')}
                                 onClick={() => (albumIndex === ix ?
                                     handleClick(artistId)
                                     : handleClick(artistId, album.spotifyId, ix)
@@ -39,34 +33,29 @@ export default function AlbumList({
                                 {album.title}
                             </h2>
 
-                            <h3 className={styles['album-year']}>
+                            <h3 className='album-year'>
                                 {album.releaseDate.slice(0,4)}
                             </h3>
                         </div>
                     </div>
 
                     {albumIndex === ix && (
-                        <div className={styles['track-list']}>
+                        <div className='track-list'>
                             {album.tracks.sort(
                                 (a,b) => a.trackNumber - b.trackNumber
                             ).map((track, trackIndex) => (
-                                <div className={styles['track-row']}
+                                <div className='track-row'
                                     key={`album-${ix}-track-${trackIndex}`}
                                 >
-                                    <span className={styles['track-order']}>
+                                    <span className='track-order'>
                                         {track.trackNumber}
                                     </span>
-                                    <span className={styles['track-title'] 
-                                        + ' clickable' 
-                                        + ( activeItemId === track.spotifyId ? 
-                                            ' text-primary'
-                                            : ''
-                                        )}
+                                    <span className={'track-title clickable' + ( activeItemId === track.spotifyId ? ' text-primary' : '' )}
                                         onClick={() => {handleClick(artistId, track.spotifyId, ix)}}
                                     >
                                         {track.title}
                                     </span>
-                                    <span className={styles['track-duration']}>
+                                    <span className='track-duration'>
                                         {`${Math.floor(track.durationMs / 60000)}:${Math.floor(track.durationMs % 60000 / 1000)}`}
                                     </span>
                                 </div>

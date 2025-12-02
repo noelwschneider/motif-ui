@@ -1,7 +1,6 @@
-import styles from './UserProfile.module.css';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import api from '../../app/api';
+import api from '../app/api';
 
 
 export default function UserProfile() {
@@ -52,27 +51,27 @@ export default function UserProfile() {
     }, [userId, userProfile]);
 
     return (
-        <div className={styles['user']}>
-            <div className={styles["profile-header"]}>
-                <div className={styles['profile picture']}>
+        <div className='user'>
+            <div className="profile-header">
+                <div className='profile picture'>
                     Avatar / Pic
                 </div>
                 <h1>{userProfile?.displayName}</h1>
             </div>
 
-            <div className={styles["activity-container"]}>
-                <div className={styles["reviews-summary"]}>
+            <div className="activity-container">
+                <div className="reviews-summary">
                     <h2>Reviews</h2>
-                    <div className={styles['review-items']}>
+                    <div className='review-items'>
                         { userProfile?.reviews?.map((review) => (
                             <ReviewItem review={review} />
                         ))}
                     </div>
                 </div>
                 
-                <div className={styles["catalogs-summary"]}>
+                <div className="catalogs-summary">
                     <h2>Catalogs</h2>
-                    <div className={styles['catalog-items']}>
+                    <div className='catalog-items'>
                         { userProfile?.catalogs?.map((catalog) => (
                             <CatalogItem catalog={catalog} />
                         ))}
@@ -83,25 +82,27 @@ export default function UserProfile() {
     );
 };
 
+
 function ReviewItem({ review }) {
     return (
-        <div className={styles['review-item']}>
-            <div className={styles['review-topline']}>
-                <div className={styles['review-thumbnail']}>pic</div>
-                <h3 className={styles['review-content-title']}>Content Title</h3>
-                <p className={styles['review-rating']}>Rating</p>
-                <p className={styles['review-date']}>mm-dd-yyyy</p>
-                <p className={styles['review-comment']}>Review comment</p>
+        <div className='review-item'>
+            <div className='review-topline'>
+                <div className='review-thumbnail'>pic</div>
+                <h3 className='review-content-title'>Content Title</h3>
+                <p className='review-rating'>Rating</p>
+                <p className='review-date'>mm-dd-yyyy</p>
+                <p className='review-comment'>Review comment</p>
             </div>
         </div>
-    )
+    );
 };
+
 
 function CatalogItem({ catalog }) {
     return (
-        <div className={styles['catalog-item']}>
-            <div className={styles['catalog-thumbnail']}>pic</div>
-            <h3 className={styles['catalog-title']}>title</h3>
+        <div className='catalog-item'>
+            <div className='catalog-thumbnail'>pic</div>
+            <h3 className='catalog-title'>title</h3>
         </div>
     );
 };
