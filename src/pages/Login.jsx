@@ -5,8 +5,8 @@ import { useCurrentUser } from '../utils/hooks';
 
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('test2@test.com');
+  const [password, setPassword] = useState('test2');
   const [error, setError] = useState('');
   const { user, setUser } = useCurrentUser();
   const location = useLocation();
@@ -17,7 +17,7 @@ export default function Login() {
     setError('');
     try {
       const loginResponse = await api.auth.login({ email, password });
-      setUser(loginResponse?.data);
+      setUser(loginResponse);
       navigate(location.state.loginRedirect || '/home');
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred');
