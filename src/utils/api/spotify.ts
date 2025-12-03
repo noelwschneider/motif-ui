@@ -93,7 +93,7 @@ export interface SpotifySearchItem {
 
 export interface SpotifySearchResponse {
     albums: SpotifySearchItem[];
-    artist: SpotifySearchItem[];
+    artists: SpotifySearchItem[];
     requestArgs: SpotifySearchArgs;
     tracks: SpotifySearchItem[];
 };
