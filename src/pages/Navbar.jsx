@@ -26,30 +26,33 @@ export default function Navbar() {
                     motif
                 </Link>
 
-                <input className="global-searchbar"
+                {/* <input className="global-searchbar"
                     type="search"
                     value={query}
                     // onChange={(e) => setQuery(e.target.value)}
                     onChange={handleSearch}
                     placeholder="Search for music"
-                />
+                /> */}
 
                 <div className='navbar-user-options'>
                     <div className='user-dropdown'>
                         { currentUser.userId ? 
                             <UserDropdown user={currentUser} /> 
-                            : <LoginButton onClick={() => setModalOpen(true)} />
+                            : <LoginButton onClick={
+                                // () => setModalOpen(true)
+                                () => navigate('/login')
+                            } />
                         }
                     </div>
                 </div>
             </div>
 
-            { modalOpen && 
+            {/* { modalOpen && 
                 <LoginModal 
                     isOpen={modalOpen}
                     onClose={() => setModalOpen(false)}
                 />
-            }
+            } */}
         </nav>
     );
 };
