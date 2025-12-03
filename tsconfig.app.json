@@ -29,7 +29,7 @@
 
     /* TypeScript */
     "allowJs": true, 
-    "checkJs": false,
+    "checkJs": true,
     "noEmitOnError": false, // allow build w/ TS errors
   },
   "include": ["src"]

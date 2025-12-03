@@ -5,14 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: {
-      app: '/src/app',
-      components: '/src/components',
-      contexts: '/src/utils/contexts',
-      hooks: '/src/utils/hooks',
-      pages: '/src/pages',
-      utils: '/src/utils',
-    },
+    alias: {},
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   server: {
